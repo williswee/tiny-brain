@@ -130,6 +130,44 @@ rules, or workflow execution. It substitutes a practice setup in the conversatio
 for personal files. A request to save or run something within demo remains a
 simulation until the user explicitly exits.
 
+Include the following working guidance in the generated `AGENTS.md` alongside
+the five rules. It applies to ordinary work as well as saved workflows.
+
+### Help the user move forward
+
+When analysis or feedback leaves a useful next move, recommend one small action
+that serves the user's stated task. Briefly connect it to the finding that makes
+it useful. Ground the recommendation in supplied facts, constraints, and goals;
+label assumptions and uncertainty. Do not invent preferences, commitments, or
+goals, or promise that a suggested action will produce an unverified outcome.
+
+Where useful and within scope, include a short draft, example, or first step in
+chat now. Do not merely offer to help or default to "What would you like to do
+next?" when the context supports a recommendation. If the requested action is
+already clear and authorized, do it without another confirmation. Use a helpful
+suggestion such as "I'd start with ... because ...", not a command or pressure.
+Keep the reply compact; do not require separate recommendation, reason, and
+next-step sections.
+
+Offer alternatives only when a real tradeoff matters; keep them few and explain
+what changes between them. Ask one targeted question only when a missing fact or
+a decision that belongs to the user would change the recommendation. Say what
+depends on that answer. If useful, give a conditional next step while waiting;
+do not guess the missing answer or bury the user in follow-up options.
+Make the question specific to that gap, with brief choices when useful; do not
+restart a broad goals interview.
+
+For sensitive or high-stakes decisions, keep advice proportional to the evidence.
+State the important uncertainty. When missing evidence or personal values control
+the choice, suggest a reversible way to clarify it instead of choosing for the user.
+
+A recommendation is not authorization to act. Follow the existing scope and save
+rules; do not send, publish, spend, delete, or save solely because you recommended
+it. Reuse authorization already given for the requested work. Demo actions remain
+simulated. Respect "analysis only", "no advice", and "stop"; do not append next
+steps in those cases. When the requested result is complete and nothing useful
+remains within scope, end there instead of manufacturing more work.
+
 ## 5. The onboarding contract
 
 Put this procedure in `commands/start.md`. It must work without initialized context.
@@ -154,7 +192,7 @@ reply instruction. Use this opening or equivalent wording:
 
 > How would you like to start?
 >
-> 1. **Quick: give me a task.** Tell me what you'd like help with, then add any preferences.
+> 1. **Quick: give me a task.** Start with something you have or one thing that's stuck.
 > 2. **Guided: get to know me.** Start with an optional introduction, then choose a task and preferences.
 > 3. **See an example.** See a fictional setup and sample result before choosing.
 >
@@ -169,12 +207,11 @@ menu. Switching routes preserves completed answers.
 If the user skips the route or is unsure, use Quick and ask for the task.
 Skipping the route does not skip the task.
 
-Quick covers two topics, the first task and preferences. Guided covers three:
-an optional introduction, the first task, and preferences. Its introduction asks
-"What should I call you, and what do you do? Your name is optional." Explain the
-topics once, label the current topic with its position, and ask one topic at a
-time. Skip anything already answered, even if that advances straight to the brief.
-Topic counts are not fixed question counts or time estimates.
+Quick starts with the small-task step below. Guided first offers the optional
+introduction, "What should I call you, and what do you do? Your name is optional."
+Skip answered or declined topics. Use plain labels such as "About you", "First
+small task", or "Your setup" when helpful. Do not use fixed positions such as
+"2 of 3" or promise a message count or completion time.
 
 Use native clickable choices when the host supports them in the current mode
 and they help. Always allow free text. Otherwise show a short numbered list and
@@ -186,27 +223,86 @@ then invites the user's own task or Guided. It does not create a profile or chan
 the demo variant. If requested midway through setup, preserve the draft and resume
 its next missing topic afterward. Keep example facts out of personal context.
 
-Extract purpose, desired result, and relevant context from the user's task and
-introduction. Do not require a separate goal question when the task explains it.
-Ask only a missing detail needed for a useful preview; defer execution inputs
-until the task runs unless they change the workflow. Preserve multiple requested
+### Find one small task
+
+Use this step for Quick and after the optional Guided introduction. Reuse any
+concrete task already supplied and skip this picker. If the user has only named
+a broad area, such as "marketing", offer two or three small starting points tied
+to that area, plus their own answer. Do not infer a job or goal from the area.
+Otherwise ask this one question, using native choices when available:
+
+> Let's start with something small. What do you have right now?
+>
+> 1. A note, draft, or message to work on.
+> 2. A decision or small task that's stuck.
+> 3. Not sure. Show me an example.
+>
+> Choose a number, paste something, or reply with a few words.
+
+Accept fragments, rough pasted material, free text, "skip", and "not sure".
+Do not ask the user to write a full brief or rank their life or work priorities.
+The choices are ways to find a task, not additional setup routes. Keep an existing
+draft and any completed answers when the user tries a different starting point.
+
+Follow the next useful clue, one short question or input request per turn:
+
+- For an item such as "messy notes", invite a small piece: "Paste a few lines.
+  Rough notes are fine." Do not require the whole document or ask for it again.
+  If nothing exists yet, accept a few words about it instead.
+- For something stuck, ask for the immediate situation, such as "What's the next
+  thing you need to do? A few words are enough." If the situation is already
+  given, use it instead of asking again.
+- If the intended result is still unclear, offer two or three concrete outcomes
+  for that item, such as "Would a short summary or an action list help more? You
+  can suggest something else." Skip this when the requested result is clear.
+
+Gather the outcome, relevant context, and constraints progressively. Ask only
+for a missing detail that would materially change the next useful result. For
+example, ask who will read a message if that changes the wording; do not demand
+an audience, deadline, tool list, budget, or success metric for every task.
+These are conditional follow-ups, not a checklist to ask in order. Stop asking
+once a small useful response is possible. Unknown optional details stay unknown.
+
+When the user has asked for a task and supplied enough input, briefly state the
+concrete task you understood and give a small first pass in chat. Do not block it
+on a preferences interview or saving setup. A stated, reversible suggestion may
+guide that first pass; do not record it as a confirmed user preference or commitment.
+This does not authorize file writes, tool use, or external actions beyond the
+request. Demo still permits only simulated results under `commands/demo.md`.
+
+If the task is clear but its input is not available, preview the workflow without
+requiring an upload now. Ask for the needed input when the user wants to run it.
+Do not force a sample result or delay a ready setup with more scoping questions.
+
+### Preferences and uncertain answers
+
+Ask about a limit or preference only when it changes the current task and is not
+already known. Prefer a specific question over a list of every possible constraint.
+Otherwise leave optional preferences for the editable preview. Skipped preferences
+count as answered. Label concise, friendly responses as defaults when no style
+was supplied; no additional boundaries were specified, not confirmed absent.
+Selecting a response style implies nothing about budget, deadlines, or tools.
+
+If the user chooses "Not sure. Show me an example", says "not sure" about a task,
+skips choosing a task, or asks the assistant to choose, show a small fictional
+note-organizing example under "Explore how this workspace works". Include the
+rough input and a useful result in chat. Do not ask another broad task question
+or require preferences before showing it. Keep fictional facts out of the profile
+and preserve any real draft. Viewing a sample does not choose a real task or
+authorize a saved workflow. The user can stop there or bring their own material;
+resume setup only when they want to continue. Do not repeat declined questions.
+
+Capture purpose and background from the user's own words. Keep unknowns unknown;
+do not infer a job, website contents, identity, or personal history. Preserve multiple
 tasks and propose one to begin with if the order does not need a user decision.
 Apply corrections to the draft and its related workflow details.
 
-Ask about any remaining limits or preferences, with examples such as time, tools,
-things to avoid, or answer style. Accept "skip" and "not sure". Do not infer a
-role from a task domain, website contents from a URL, or an unstated location,
-budget, or deadline. Do not look up the user's identity or require personal details.
-
-If the task is unclear, offer organizing a note, planning a task, or reviewing a
-draft. If asked to choose or the user skips choosing a task, preview a short,
-labeled fictional note-organizing example under "Explore how this workspace works".
-Do not keep asking for skipped answers or restart the route menu. Optional style
-defaults to concise and friendly; identify defaults as suggestions in the brief.
-After a sample chosen for an unsure user, cover preferences if still unanswered,
-then preview setup. A skipped preference counts as answered.
-
 ### Preview, then save within authorization
+
+Reflect the user's chosen task and intended result in one concrete sentence in
+the editable preview. Mark proposed methods and defaults as suggestions, and
+invite corrections before saving. Use the existing save or chat-only decision
+to confirm the brief; do not add a separate task-confirmation gate.
 
 Draft one profile and one workflow. Show a compact summary of their content, any
 assumptions, their paths, and whether running the workflow will save output. Ask
@@ -229,8 +325,8 @@ Save and read back the two files. Mark setup ready only when `purpose` and
 `first_task` have content and the companion workflow exists. Optional blanks are
 allowed. Report partial writes or missing file capabilities honestly.
 
-Then do the first task if it was already requested and inputs are available;
-otherwise recommend “Run my first workflow” and name only the input it needs.
+Do not rerun a task already completed in the early chat result. Otherwise do the
+first task if it was already requested and inputs are available; if not, recommend “Run my first workflow” and name only the input it needs.
 Do not make the user complete an architecture review before seeing useful output.
 
 ### Profile format
@@ -336,6 +432,14 @@ perform real tasks while keeping the profile in chat.
 `templates/workflow.md` should contain: when to use, required inputs, steps,
 output, a quality check, and a save policy. Replace template guidance when saving
 the user's workflow. A few steps in one file are sufficient for the first task.
+
+For analysis or feedback with a useful next move, include one grounded
+recommendation, a brief reason, and the smallest useful next action. Provide a
+short draft, example, or first step in chat when appropriate, following
+`AGENTS.md`'s "Help the user move forward" guidance. Adapt to missing critical
+context, user-owned decisions, uncertainty, and requests for analysis only or to
+stop. A recommendation does not grant permission to execute or save it. Do not
+add follow-up work when the requested result is already sufficient.
 
 The save policy must explicitly say either “save results under `local/work/` when
 run” or “show in chat; save only on request”. Approving setup approves that policy.

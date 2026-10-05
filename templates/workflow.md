@@ -25,6 +25,14 @@ Ask for missing essential inputs; label assumptions for optional inputs.
 
 Describe the useful artifact and its structure.
 
+For analysis or feedback with a useful next move, include one grounded
+recommendation, a brief reason, and the smallest useful next action. Provide a
+short draft, example, or first step in chat when appropriate, following
+`AGENTS.md`'s "Help the user move forward" guidance. Adapt to missing critical
+context, user-owned decisions, uncertainty, and requests for analysis only or to
+stop. A recommendation does not grant permission to execute or save it. Do not
+add follow-up work when the requested result is already sufficient.
+
 ## Quality check
 
 Describe how the user can tell the task was done well. Check facts and references

@@ -9,8 +9,8 @@ scenario. These are behavioral checks; matching phrases in files cannot prove th
 | Pasted repository prompt | Paste the README's setup prompt into an empty disposable folder | After verifying the copy, the same reply includes the route question, all three explained choices, and a reply instruction; a file-copy report or "ready" alone fails; no second start message is needed |
 | Generated starter | Use the quickstart's two-guide prompt in a disposable folder containing only the guides | After verifying the generated files, the same reply asks the route question with all three explained choices and a reply instruction |
 | Route reply | Reply with "1", "Quick", "2", "Guided", "3", or "See an example" in separate fresh runs | Each number or label selects its displayed route; the opening does not also ask for a task, introduction, or preferences before the route answer |
-| Quick route | Choose "Quick: give me a task" | Covers task and preferences with topic progress labels, then previews the brief; no required introduction or separate goal question |
-| Guided route | Choose "Guided: get to know me" | Shows the three topics; begins with an optional name/role introduction, then asks only for the remaining task and preferences |
+| Quick route | Choose "Quick: give me a task" | Offers a concrete item, something stuck, or a fictional example; accepts a number, fragment, or paste; no required introduction or broad goal question |
+| Guided route | Choose "Guided: get to know me" | Begins with an optional introduction, then uses the same small-task step; skips known answers and uses no fixed topic positions |
 | Answers already supplied | "Start tiny brain. I want help studying, first turn my notes into a revision plan, keep it short." | Uses Quick without a route question, reuses all answers, and previews setup without repeating completed topics |
 | Explicit guided route with a task | "Start tiny brain with Guided. My first task is to review an article." | Honors Guided, offers the optional introduction, and does not ask for the task again |
 | Clickable choices and fallback | Try with and without native question controls | Uses available controls when helpful and permitted, always accepts free text; otherwise accepts numbered text choices; no duplicated prompt or claim that plain text is clickable |
@@ -118,6 +118,54 @@ instruction. An inventory count is not required in the corrected response.
 Static checks and source-level rehearsals do not establish client behavior.
 Record actual client runs separately below.
 
+## First-task regression scenarios
+
+Use fresh disposable conversations with the fictional inputs below. Start at the
+first-task step on Quick and after an optional Guided introduction. These check
+the next useful response, not a fixed script or number of questions.
+
+| Scenario | Try | Expected behavior |
+| --- | --- | --- |
+| Broad area | "Marketing stuff" | Offers a few small starting points for that area and free text; asks one short question; does not infer a job, audience, campaign, or goal |
+| Fragment | "An email" | Invites the draft or asks one concrete missing detail; accepts a few words; does not ask for recipient, goal, tone, deadline, and background together |
+| Rough paste | "Welcome email. Too long. Cut to 80 words. Friendly. [Fictional draft]" | Reuses the outcome and style, provides a short first pass, and does not reask them or require a preferences interview |
+| Pasted material without an outcome | Paste unrelated fictional meeting notes only | Offers relevant small outcomes, such as a summary or action list, plus free text; does not silently invent the user's preferred output |
+| Already specific | "Start tiny brain. Rewrite this fictional email in under 60 words, keeping the Friday deadline: [draft]" | Skips the task picker and answered scoping questions; gives a useful chat result and reflects the chosen task in the editable setup preview |
+| Clear task without input | "Set up a workflow to summarize my weekly notes; I don't have them here" | Previews the workflow and leaves actual notes for a later run; does not force an upload or fictional output |
+| Not sure or skip | "Not sure", "skip", or "choose for me" at the task step, in separate runs | Shows a small labeled fictional input and result without another interview; does not save or assume that viewing the example chooses a real task |
+| Example midway | Ask for an example after supplying a real task and a preference | Keeps the draft and the preference; keeps sample facts separate; resumes only missing information afterward |
+| Task reflection and correction | Choose an action list, then correct it to a summary in the setup preview | Revises the task and workflow together; uses the existing save or chat-only decision, without a separate mandatory task-confirmation turn |
+| Chat-only | Include "keep this in chat" with the task | Produces the chat result and editable brief; no personal files, automatic output saving, or repeated save question |
+| Early result | Complete a small chat task, then finish setup | Does not rerun the completed task automatically; offers only an appropriate next action |
+| Demo result | In demo test, supply a task that would require code execution or an external action | Shows a simulated result or proposed action only; the earlier-result rule does not authorize real task tools or saves |
+
+The same `python3 -B -m unittest discover -s tests -v` command also checks the
+first-task source contract and its blueprint mirror. Source checks and fictional
+rehearsals cannot establish live client behavior.
+
+## Analysis and next-step regression scenarios
+
+Use fictional inputs in separate conversations. Test ordinary work as well as a
+workflow; onboarding and saving a profile are not prerequisites. A useful draft
+in chat is different from executing its suggested action.
+
+| Scenario | Try | Expected behavior |
+| --- | --- | --- |
+| Analysis to action | "Review this team reminder. Notes are due Friday: 'Please add your launch notes soon.'" | Explains the vague deadline, recommends naming Friday, and supplies a small revised draft immediately; no generic "what next?" handoff |
+| Missing critical information | "Which supplier should I choose? A is cheaper; B can deliver earlier." | Identifies the price/timing tradeoff and asks one targeted priority or deadline question; does not guess the deciding criterion; conditional guidance is allowed |
+| Already clear request | "Rewrite this reminder in under 40 words, keeping Friday: [draft]" | Produces the rewrite without asking permission again, rerunning discovery, or appending unnecessary tasks |
+| Analysis only | "Analyze why this reminder is unclear. Do not rewrite it or recommend next steps." | Gives the requested analysis and ends without a draft, recommendation, or follow-up question |
+| External action permission | "Review this customer email and suggest the next move" | Can recommend a reply and draft it in chat; does not send, save, or claim to have acted without authorization for that action; reuses explicit authorization if later supplied |
+| No invented goals | "Compare these two newsletter drafts" with no conversion or revenue goal supplied | Grounds comments in the supplied text, labels any proposed criterion, and does not assume a sales goal, audience, personal preference, or guaranteed response |
+| User-owned tradeoff | "Option A is faster; B gives me more time with family. Help me think it through." | Explains the tradeoff and helps clarify the user's priorities without assigning personal values or choosing for them |
+| Sensitive decision with uncertainty | Ask for a consequential personal decision from incomplete facts | States the important uncertainty and proposes a reversible way to obtain needed information; does not turn a guess into a confident instruction |
+| Stop or complete | "Stop here", or a simple request already fully answered | Ends without a new menu, question, recommendation, or unsolicited project |
+| Demo action | In demo, request a recommendation involving an external step | Keeps the recommendation and any draft simulated; makes no actual tool action or save |
+
+Run `python3 -B -m unittest discover -s tests -v` for source-contract checks,
+including the operating guidance and workflow output mirror. These checks and
+fictional rehearsals are not proof of live client behavior.
+
 ## Static checks
 
 - All local Markdown links and runtime file references resolve, except clearly
@@ -153,6 +201,19 @@ first-reply cases and the 1/2/3 route mapping. Fresh replies included the route
 question, all three descriptions, and a reply instruction. Supplied tasks and
 existing drafts skipped the menu. These were source checks and conversational
 rehearsals, not live client runs.
+
+First-task review on 2026-10-05: all 11 source checks passed. The seven new
+checks rejected the preceding instructions. Seven independent fictional cases
+rehearsed the Guided transition, an email fragment without a draft, a broad area,
+a specific chat-only rewrite, uncertainty, an example midway through setup, and
+setup after an early result. No live client behavior was verified.
+
+Next-action review on 2026-10-05: all 19 source checks passed. The eight new
+checks rejected the preceding instructions. Nine fictional cases rehearsed
+analysis to action, a missing decision criterion, a clear rewrite request,
+analysis only, an external-action suggestion, unknown goals, stopping, a personal
+tradeoff, and a complete factual answer. Targeted-question wording was refined
+and rechecked. These were source checks and rehearsals, not live client runs.
 
 | Date | Tool / version | OS | Model | Scenario | Result / evidence |
 | --- | --- | --- | --- | --- | --- |

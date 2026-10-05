@@ -60,8 +60,8 @@ For a fresh setup with no task or route supplied, the assistant's first reply af
 
 | Choice | What happens |
 | --- | --- |
-| Quick: give me a task | Describe what you want done, add any preferences, then review the brief. If your setup request already includes a task, the assistant starts here automatically. |
-| Guided: get to know me | Share an optional introduction, choose a first task, and add preferences. Progress labels show the three topics before the brief. |
+| Quick: give me a task | Start with a note, draft, or something that's stuck, then review a small task and setup. If your request already includes a task, the assistant uses it. |
+| Guided: get to know me | Share an optional introduction, then find one small task with the same help as Quick. Skip anything you've already answered. |
 | See an example | See a short fictional example before choosing your own task or guided setup. |
 
 The assistant asks about one topic at a time and reuses answers you already gave. Choose an option when clickable choices are available, or type your own answer. You can say "not sure", skip questions, correct the brief, or keep the setup only in this chat. No name or job is required.
@@ -278,20 +278,28 @@ Replace "weekly sales pipeline review" with the use case you choose. Start with 
 
 ## What the assistant asks you
 
-Quick starts with your task. Guided adds an optional introduction first. The assistant asks one topic at a time, reuses answers you have already given, and asks follow-up questions only when needed for a useful setup.
+Quick starts with something you have or one thing that's stuck. Guided adds an optional introduction first. A few words or a rough paste are enough to begin. The assistant asks one short question at a time, reuses what you've said, and stops asking once it can give a useful first pass in chat. You can review a reusable setup afterward; saving is optional.
 
 | Topic | Example question | What the assistant needs to know |
 | --- | --- | --- |
 | About you, in Guided | "What should I call you, and what do you do? Your name is optional." | Relevant background you choose to share. You can skip the introduction. |
-| Your first task | "What's one useful thing you'd like help with first?" | What you want done and what a useful result looks like. This can also supply your goal without another question. |
-| Your constraints and preferences | "What limits or preferences should I respect?" | Relevant deadlines, available time and resources, things to avoid, and how you want answers presented. Skip details that do not matter. |
+| First small task | "What do you have right now?" Choose something to work on, something stuck, or a fictional example. | One concrete item or situation. Paste it, describe it in a few words, or use your own answer. A task already supplied skips this question. |
+| Result, only if unclear | "Would a short summary or an action list help more?" | The smallest useful output for your item. Choices adapt to what you supplied. |
+| Context or limits, only if needed | "Who will read this message?" | Only a detail that would change the result. Other preferences can wait for the editable preview. |
 
-You can start without all the answers and add details as you work. The assistant should never assume your industry, country, job, or personal circumstances.
+These are possible questions, not a questionnaire or fixed number of steps. You can start without all the answers and add details as you work. Before saving, the assistant reflects your chosen task and result in a brief you can correct. Suggestions stay separate from your stated preferences. The assistant should never assume your industry, country, job, or personal circumstances.
 
 ## How it works
 
 Read from top to bottom. Review a setup when you first start or need to change it.
 If your existing setup fits the task, the assistant can use it and begin work.
+
+After analysis, the assistant should recommend a useful next move, briefly explain
+why, and provide a small draft or first step when the context supports it. It
+asks a targeted question only when a missing fact or a decision you own matters.
+Suggestions stay within your request and do not grant permission to send, save,
+or take other actions. You can ask for analysis only or stop; a completed answer
+does not need extra tasks attached to it.
 
 ```mermaid
 %%{init: {"theme":"base","flowchart":{"nodeSpacing":24,"rankSpacing":32,"wrappingWidth":320},"themeVariables":{"fontSize":"16px","lineColor":"#64748b","edgeLabelBackground":"#f1f5f9"}}}%%

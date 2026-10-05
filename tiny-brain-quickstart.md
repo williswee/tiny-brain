@@ -80,15 +80,27 @@ and external actions. After leaving demo, continue below when you want real setu
 For a fresh setup with no task or route supplied, the assistant's first reply asks
 how you'd like to start and shows these choices:
 
-1. **Quick: give me a task.** Describe one useful thing you want done, then add any
-   preferences. The assistant moves straight to this route if you already gave a task.
+1. **Quick: give me a task.** Start with a note, draft, or something that's stuck.
+   The assistant uses a task you've already supplied without asking you to choose again.
 2. **Guided: get to know me.** Start with "What should I call you, and what do you
    do?" Your name is optional. Then choose a first task and add any preferences.
 3. **See an example.** See a short fictional setup and result before trying your own.
 
-Quick covers two topics; Guided covers three. The assistant shows your progress,
-asks one topic at a time, and skips what you already answered. Both end with a
-short brief you can edit. These are topic counts, not a fixed number of messages.
+After the optional Guided introduction, both routes help you find one small task:
+
+> Let's start with something small. What do you have right now?
+>
+> 1. A note, draft, or message to work on.
+> 2. A decision or small task that's stuck.
+> 3. Not sure. Show me an example.
+>
+> Choose a number, paste something, or reply with a few words.
+
+A fragment or a rough paste is enough to begin. The assistant asks only for a
+missing detail that changes the result, one short question at a time. A clear
+task skips these questions. When you've asked for work and supplied enough input,
+it can give a small first pass in chat before you decide whether to save a setup.
+There is no fixed question count, and optional preferences can wait for the brief.
 
 Click a choice if your tool offers buttons, or type its number, label, or your own
 answer. "I'm not sure yet" and "skip" are valid answers. The assistant can help
@@ -96,7 +108,9 @@ you choose a small task. No name, job, country, or detailed profile is required.
 
 ## 3. Review the small setup
 
-The assistant shows the goal, preferences, and first workflow it proposes to save.
+The assistant reflects your chosen task and intended result in one sentence,
+then shows the context, preferences, and first workflow it proposes to save.
+Proposed methods and defaults stay separate from facts you've confirmed.
 A **workflow** is simply a short recipe for repeating a task.
 
 Correct anything that is wrong, then say “Save this setup”. It saves:

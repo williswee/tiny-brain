@@ -40,7 +40,7 @@ of each, and an explicit reply instruction:
 
 > How would you like to start?
 >
-> 1. **Quick: give me a task.** Tell me what you'd like help with, then add any preferences.
+> 1. **Quick: give me a task.** Start with something you have or one thing that's stuck.
 > 2. **Guided: get to know me.** Start with an optional introduction, then choose a task and preferences.
 > 3. **See an example.** See a fictional setup and sample result before choosing.
 >
@@ -68,54 +68,87 @@ If the user skips the route choice or is unsure, continue with Quick and ask for
 the first task. Skipping the route does not also skip choosing a task.
 An ordinary task outside setup still follows `AGENTS.md` without an interview.
 
-### Quick
+### Quick and Guided
 
-Explain the length once: "We'll cover your task and preferences, then review a
-short brief. You can skip any question." Use `1 of 2: Your first task` and
-`2 of 2: Preferences` only when asking about those topics. Skip completed topics.
+Quick starts with the small-task step below. Guided adds an optional introduction
+first: "What should I call you, and what do you do? Your name is optional."
+Accept any introduction, including a role, project, or what keeps them busy.
+Do not look up their identity or ask again for skipped details. Both routes use
+the same small-task step and editable preview; skip anything already answered.
 
-Ask: "What's one useful thing you'd like help with first?" Reuse any task already
-given. Extract the purpose, desired result, and relevant background from the
-answer. A clear first task is enough; do not add a separate goal question merely
-to fill the profile. If a useful setup preview needs clarification, ask the one
-missing detail that matters most. Leave execution inputs for when the task runs
-unless they change the workflow itself.
+Use plain topic labels such as "About you", "First small task", or "Your setup"
+only when helpful. Do not use fixed positions such as "2 of 3" or promise a
+message count or completion time. A useful answer may move straight to a result
+or the preview.
 
-### Guided
+### Find one small task
 
-Explain the length once: "We'll cover you, your first task, and your preferences,
-then review a short brief. You can skip any question." Use these topic labels:
+Use this step for Quick and after the optional Guided introduction. Reuse any
+concrete task already supplied and skip this picker. If the user has only named
+a broad area, such as "marketing", offer two or three small starting points tied
+to that area, plus their own answer. Do not infer a job or goal from the area.
+Otherwise ask this one question, using native choices when available:
 
-1. **1 of 3: About you.** "What should I call you, and what do you do? Your name is
-   optional." Accept any introduction, including a role, project, or what keeps
-   them busy. Do not look up their identity or ask again for skipped details.
-2. **2 of 3: Your first task.** "What would you most like help with first?" Relate
-   the question to the introduction when useful. Offer a few concrete tasks based
-   on their answers, plus room to describe something else. Apply the same rules
-   for capturing purpose and asking only needed follow-ups as Quick.
-3. **3 of 3: Preferences.** Ask only about limits or preferences not already given.
+> Let's start with something small. What do you have right now?
+>
+> 1. A note, draft, or message to work on.
+> 2. A decision or small task that's stuck.
+> 3. Not sure. Show me an example.
+>
+> Choose a number, paste something, or reply with a few words.
 
-These are topic counts, not a promise of exactly two or three messages or a timed
-estimate. If an answer covers later topics, skip those questions and advance to
-the next missing topic or preview. Do not display stages the user already finished.
+Accept fragments, rough pasted material, free text, "skip", and "not sure".
+Do not ask the user to write a full brief or rank their life or work priorities.
+The choices are ways to find a task, not additional setup routes. Keep an existing
+draft and any completed answers when the user tries a different starting point.
+
+Follow the next useful clue, one short question or input request per turn:
+
+- For an item such as "messy notes", invite a small piece: "Paste a few lines.
+  Rough notes are fine." Do not require the whole document or ask for it again.
+  If nothing exists yet, accept a few words about it instead.
+- For something stuck, ask for the immediate situation, such as "What's the next
+  thing you need to do? A few words are enough." If the situation is already
+  given, use it instead of asking again.
+- If the intended result is still unclear, offer two or three concrete outcomes
+  for that item, such as "Would a short summary or an action list help more? You
+  can suggest something else." Skip this when the requested result is clear.
+
+Gather the outcome, relevant context, and constraints progressively. Ask only
+for a missing detail that would materially change the next useful result. For
+example, ask who will read a message if that changes the wording; do not demand
+an audience, deadline, tool list, budget, or success metric for every task.
+These are conditional follow-ups, not a checklist to ask in order. Stop asking
+once a small useful response is possible. Unknown optional details stay unknown.
+
+When the user has asked for a task and supplied enough input, briefly state the
+concrete task you understood and give a small first pass in chat. Do not block it
+on a preferences interview or saving setup. A stated, reversible suggestion may
+guide that first pass; do not record it as a confirmed user preference or commitment.
+This does not authorize file writes, tool use, or external actions beyond the
+request. Demo still permits only simulated results under `commands/demo.md`.
+
+If the task is clear but its input is not available, preview the workflow without
+requiring an upload now. Ask for the needed input when the user wants to run it.
+Do not force a sample result or delay a ready setup with more scoping questions.
 
 ### Preferences and uncertain answers
 
-On either route, ask: "Any limits or preferences I should work around, such as
-time, tools, things to avoid, or how you like answers? You can skip this."
-Where choices help, offer a few relevant examples and a skip option, while keeping
-free text available. Selecting a response style does not imply anything about
-budget, deadlines, tools, or other limits.
+Ask about a limit or preference only when it changes the current task and is not
+already known. Prefer a specific question over a list of every possible constraint.
+Otherwise leave optional preferences for the editable preview. Skipped preferences
+count as answered. Label concise, friendly responses as defaults when no style
+was supplied; no additional boundaries were specified, not confirmed absent.
+Selecting a response style implies nothing about budget, deadlines, or tools.
 
-If the task is unclear, offer small choices such as organizing a note, planning
-a task, or reviewing a draft. If asked to choose or if the user skips choosing a
-task, preview a small fictional note-organizing example under "Explore how this
-workspace works". Keep its sample facts out of the profile. Do not loop through
-the route picker or keep asking for an identity or task they declined to provide.
-After that sample, cover preferences only if still unanswered, then preview the
-setup. A skipped preference counts as answered.
-Skipped preferences default to concise, friendly responses with no additional
-boundaries specified by the user. Label those as defaults in the preview.
+If the user chooses "Not sure. Show me an example", says "not sure" about a task,
+skips choosing a task, or asks the assistant to choose, show a small fictional
+note-organizing example under "Explore how this workspace works". Include the
+rough input and a useful result in chat. Do not ask another broad task question
+or require preferences before showing it. Keep fictional facts out of the profile
+and preserve any real draft. Viewing a sample does not choose a real task or
+authorize a saved workflow. The user can stop there or bring their own material;
+resume setup only when they want to continue. Do not repeat declined questions.
 
 Capture context accurately: a request for marketing help is not a claim that the
 user is a marketer. Keep supplied names, roles, projects, offers, audiences, and
@@ -136,7 +169,12 @@ Read `templates/profile.md` and `templates/workflow.md`. Draft:
   a few steps, an output, a quality check, and an explicit local save policy.
 
 Both routes end with the same short, editable brief: confirmed context, the first
-task and intended result, preferences and limits, and the proposed workflow. Keep
+task and intended result, preferences and limits, and the proposed workflow.
+Reflect the task in one concrete sentence, such as "Turn rough meeting notes into
+an action list, leaving missing owners and dates unknown." Use only the user's
+chosen task; mark any suggested output or method as proposed. Invite corrections
+in this preview before saving. Use the existing save or chat-only decision to
+confirm the brief; do not add a separate task-confirmation gate. Keep
 unknowns and suggested defaults distinct from confirmed facts. Show both intended
 paths without dumping blank template headings. State that running this workflow
 will save output under `local/work/` if that is the proposed policy. Offer
@@ -184,10 +222,14 @@ opening this folder in a file-capable tool; do not pretend it was saved.
 
 ## 5. Reach the first useful result
 
-Briefly summarize what was saved, or configured for this session, and how to change it. If the user has already
-requested the first task and supplied its inputs, do it now using the workflow.
-Otherwise offer one next action: “Run my first workflow”, with only the input it
-actually needs. The first success is useful work, not finishing a file inventory.
+Briefly summarize what was saved, or configured for this session, and how to
+change it. If an early chat result already completed the task, refer to that
+result and offer to revise it or use the workflow with new input. Do not rerun
+completed work merely because setup has finished.
+Otherwise, if the user has requested the first task and supplied its inputs,
+do it now using the workflow. If inputs are missing, offer "Run my first workflow"
+with only the input it actually needs. The first success is useful work, not
+finishing a file inventory.
 
 Do not restart setup when `/start` is repeated. Do not silently create a second
 profile or replace a personalized workflow. Do not install integrations or send
