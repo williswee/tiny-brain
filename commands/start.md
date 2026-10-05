@@ -175,48 +175,119 @@ an action list, leaving missing owners and dates unknown." Use only the user's
 chosen task; mark any suggested output or method as proposed. Invite corrections
 in this preview before saving. Use the existing save or chat-only decision to
 confirm the brief; do not add a separate task-confirmation gate. Keep
-unknowns and suggested defaults distinct from confirmed facts. Show both intended
-paths without dumping blank template headings. State that running this workflow
-will save output under `local/work/` if that is the proposed policy. Offer
-session-only use too. Omit personal details the user asks to leave out.
-Ask "Save this setup?" only if the user has not already chosen saving or
-session-only use. "No saving" selects session-only use with output in chat;
-honor it without asking again or proposing automatic output saving.
-If saving is requested before a usable draft exists, collect only what is needed
-to form it and show the preview first. Do not create a partial setup just because
-the user requested a save early. In demo, the same rule applies to simulated files.
-Corrections are instructions to revise the draft, not approval of unrelated facts.
+unknowns and suggested defaults distinct from confirmed facts. Omit personal
+details the user asks to leave out. Show intended paths without dumping blank
+template headings or asking the user to choose filenames.
+
+### Choose what to keep
+
+Make the first-use saving choice explicit in the same brief. Show the proposed
+setup paths, the task covered by saving, and the proposed current checkpoint under
+`local/work/`. A checkpoint keeps the current result, confirmed decisions,
+unresolved questions, and the next step. Show which of those items exist now;
+do not invent missing decisions or questions. Say that future checkpoints would
+update this task's file at meaningful milestones or when the user asks to pause,
+only while the assistant is actively working on the task. They do not run in the
+background. Full conversation transcripts are not saved by default.
+
+If no saving choice already covers this scope, ask:
+
+> What would you like to keep?
+>
+> 1. **Save setup, result, and progress.** Keep the setup, the actual result, and a short checkpoint as we work on this task or when you ask to pause.
+> 2. **Save setup only.** Keep the setup; show results in chat unless you ask to save one.
+> 3. **Keep everything in this chat.** Use the setup here without saving personal files.
+>
+> Reply with 1, 2, or 3, or tell me what to change in the brief.
+
+This choice approves only the previewed scope. Reuse an explicit choice already
+given instead of asking again. "Save setup" alone means setup only; a request to
+save one result does not authorize ongoing checkpoints. Record the selected
+policy and task scope in the workflow, with the current checkpoint path when
+applicable. Do not require approval for each routine checkpoint within that scope.
+New tasks, new kinds of retained information, or a wider save scope need their
+own authorization. Saving progress does not authorize unrelated context changes,
+external actions, or saving sensitive source material.
+
+"No saving" selects session-only use with output in chat. Honor it without asking
+again or proposing automatic output saving. A later no-save instruction overrides
+any earlier ongoing-save policy and pending improvement-history updates. It does
+not delete existing files. If saving is requested before a usable draft exists,
+collect only what is needed to form it and show the preview first. Do not create
+a partial setup just because the user requested a save early. In demo, the same
+rule applies to simulated files. Corrections revise the draft; they do not approve
+unrelated facts.
+
+### Add useful context gradually
 
 Do not require a project name, architecture, persona, mandatory context files,
-custom gates, plugins, a skill library, or an API connection to get started.
-Keep initial context in the profile. If the user asks for separate context files,
-use the optional map in `README.md`: `local/context/goals.md`, `project.md`,
-`constraints.md`, `preferences.md`, and `people.md`. Create only requested topics,
-move their detail out of the profile, and link to them there. Do not use README
-illustrations as user facts or create empty files merely to complete the map.
+custom gates, plugins, a skill library, a GitHub account, or an API connection to
+get started. Keep initial context in the profile. When a goal, project detail,
+working preference, or detail about a collaborator would materially help the
+task, invite that one topic in plain language. Reuse what the user already said
+and accept "skip" without another prompt or an empty file. Ask for only the
+minimum useful information about other people; avoid private details unrelated
+to the work. Do not infer traits or general preferences from one task.
+
+Offer a separate context file only when the detail has become useful to reuse or
+the user requests it. Use the optional map in `README.md` for paths. Propose the
+actual content and its purpose, then get consent before persisting it unless
+that exact change is already authorized. Move approved detail out of the profile
+and link to its one authoritative copy. Do not burden the user with filenames,
+use README illustrations as user facts, or create empty files to complete the map.
+When relevant saved context may be stale, ask about the specific fact before
+relying on it; a correction does not authorize saving other facts.
 
 ## 4. Save and verify, or continue without saving
 
 On authorization, ensure `/local/` is covered by the root `.gitignore`. If Git is
 available and this folder is inside a Git checkout, verify the intended paths are
-ignored; if they are already tracked,
-explain that ignoring does not untrack them and resolve sharing intent before
-saving private data. Do not alter Git history or untrack files without direction.
-If Git is unavailable or this is a plain folder such as an extracted ZIP, proceed
-locally without initializing Git. Explain once that ignore rules are prepared for
-future Git use but the current folder has no verified Git protection.
+ignored. If they are already tracked, explain that ignoring does not untrack them
+and resolve sharing intent before saving private data. Do not alter Git history
+or untrack files without direction. If Git is unavailable or this is a plain
+folder such as an extracted ZIP, proceed locally without initializing Git. A
+plain folder needs no GitHub account. Do not warn that it lacks "Git protection";
+Git ignore rules do not provide encryption or a backup.
 
-Create `local/work/` and the other needed directories, then save the two files. Mark the profile's
-`setup_status` as `ready` only when its `purpose` and `first_task` are nonempty and
-the companion workflow is saved. Unknown optional fields are acceptable. Read
-back both files. If a write fails, report the partial state and resume from it on
-the next attempt. Never announce setup complete based solely on a drafted response.
+Create only needed directories and save the authorized setup files. Mark the
+profile's `setup_status` as `ready` only when its `purpose` and `first_task` are
+nonempty and the companion workflow is saved. Unknown optional fields are
+acceptable. With setup-and-progress consent, save an actual result already shown
+in chat into the agreed checkpoint during this same turn. Do not leave the first
+result only in chat after saving its setup. If no result exists yet, save the
+setup and say that the checkpoint will be created when the task produces one;
+do not create an empty checkpoint or claim work was completed.
+
+Keep one current checkpoint per active task under `local/work/`, using a readable
+filename with the actual date and task name. Inspect an existing file before
+updating it. Update only this task's current result, confirmed decisions,
+unresolved questions, next step, and saved scope; preserve unrelated work.
+Keep a link to the checkpoint in the workflow so a later session can find it.
+Do not create a new dated copy at every milestone or overwrite another task's
+output. Use the shared checkpoint rules in `AGENTS.md` during later work.
+
+Read back every written file, including the saved result and checkpoint link.
+Report success only for verified files. If a write or verification fails, name
+what was saved, what is missing or unverified, and the next repair needed. A
+saved setup with an unsaved result is partial progress, not a complete save.
+Preserve that state for repair without rerunning successful writes blindly.
+
+Give a short receipt with the actual saved location, a link to the latest result
+or checkpoint when one exists, and an exact reopening instruction. For example,
+use "Open this same folder in your AI app and say: Resume from <actual checkpoint
+path>." Replace the placeholder with the verified path. If only setup was saved,
+point to the workflow and say that the result remains in chat. Explain once that
+these are files in this folder and that any backup depends on the user's own
+folder backup or sync; do not imply a cloud copy was created or claim to know its
+backup status. Keep Git terminology out of the ordinary receipt unless a real
+tracked-private-file issue needs attention.
 
 For session-only use, keep the draft in the conversation and do not create personal
-files. Override any proposed automatic save policy with “show in chat; save only
-on explicit request”. “Run my first workflow” runs this in-conversation draft,
-even if there is no saved file. Explain once that it will need to be supplied again
-in another session.
+files. Override any proposed automatic save policy with "show in chat; save only
+on explicit request". "Run my first workflow" runs this in-conversation draft,
+even if there is no saved file. Explain once that the user will need to supply
+this draft or chat context again in another session. A pasted prompt alone does
+not restore unsaved work.
 If file tools are unavailable, show the draft and explain that saving requires
 opening this folder in a file-capable tool; do not pretend it was saved.
 

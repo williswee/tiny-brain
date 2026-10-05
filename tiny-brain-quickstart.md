@@ -9,12 +9,14 @@ Start with something you actually want done.
 ## 1. Open your copy
 
 You need an AI tool that can read and write files in a folder, such as Codex,
-Claude Code, or Cursor. Install and sign in to your chosen tool first; its normal
-account and usage requirements apply. Git is optional for local use.
+Claude Code, or Cursor. Install and sign in to your chosen tool first. Sign-in
+requirements and any usage charges depend on the app, your account, and provider;
+check those with the app. You do not need Git or a GitHub account to use the starter.
 
 Get the whole folder from the [tiny brain repository](https://github.com/williswee/tiny-brain)
-using **Code → Download ZIP**, or use a copy someone shared with you. Extract the
-ZIP first. Keep `AGENTS.md`, `commands/`, and `templates/` together.
+using **Code > Download ZIP**, or use a copy someone shared with you. Extract the
+ZIP first. Keep the whole starter folder together, including `AGENTS.md`,
+`commands/`, `skills/`, and `templates/`.
 
 - **Codex:** open or add this folder as a local project and start a chat in it.
 - **Claude Code:** start a session in this folder using your usual Claude Code
@@ -35,43 +37,6 @@ and say:
 
 The full starter is the easier route; the two-guide route asks the assistant to
 build the small set of files first.
-
-## Try a demo first
-
-With the starter folder open, say "tiny brain demo" or type `/demo` to choose:
-
-- `/demo show` gives a short fictional walkthrough of setup, a sample task, and
-  returning to the work. Use it to explain tiny brain to someone new.
-- `/demo test` starts fresh onboarding for you to try. Answer as a new user, skip
-  optional details, or correct the draft to test how the conversation responds.
-
-The assistant follows the current starter files and labels demo replies. All
-practice setup stays in chat, even if you say "save", "remember", or "run".
-It does not read your existing personal setup, change files, run code or external
-actions, browse the web, call connected services, commit, or push.
-
-To test onboarding, send these as separate messages in the same chat:
-
-1. `/demo test` starts the interview. You do not need `/demo` or `/start` first.
-2. Answer each question normally. When offered a setup, try "Save this setup"
-   and then "Run my first workflow", or choose session-only use. Actions stay simulated.
-3. `/demo review` pauses for feedback on the experience so far. You can use it
-   halfway through; finishing onboarding first is not required.
-4. Reply normally to continue, use `/demo reset` for a fresh attempt, or
-   `/demo exit` to finish. Review before reset or exit if you want feedback on
-   that attempt. Sending `/demo test` again also starts over.
-
-For a presentation, start with `/demo show`. Then optionally review it, switch
-to `/demo test` so the viewer can try it, or exit. Review is optional and keeps
-the current demo open; the commands are not a mandatory sequence.
-
-"tiny brain demo test" also works as ordinary text. If needed, paste:
-
-> Read AGENTS.md and commands/demo.md, then start demo test.
-
-Demo is an instruction for the conversation, not a permission sandbox. Normal
-session-only use can do real tasks without saving a profile; demo simulates file
-and external actions. After leaving demo, continue below when you want real setup.
 
 ## 2. Say one sentence
 
@@ -113,23 +78,38 @@ then shows the context, preferences, and first workflow it proposes to save.
 Proposed methods and defaults stay separate from facts you've confirmed.
 A **workflow** is simply a short recipe for repeating a task.
 
-Correct anything that is wrong, then say “Save this setup”. It saves:
+Correct anything that is wrong, then choose how much to keep:
 
-- `local/profile.md` — your goals, what a good result looks like, relevant background,
-  constraints, and working preferences, based on what you choose to share.
-- `local/workflows/first-task.md` — how to do the first task again.
+| Choice | What it saves |
+| --- | --- |
+| Save setup, result, and progress | The reviewed setup, your actual task result, and useful checkpoints for this active task. |
+| Save setup only | The reviewed profile and first workflow. Results stay in chat unless you later ask to save them. |
+| Keep everything in this chat | No personal files. You can still use the assistant for the real task. |
 
-The first setup keeps context in one profile. Separate files for goals, projects,
-constraints, preferences, or people can be added when you need them. You do not
-have to fill them all in to begin.
+Saving setup creates `local/profile.md` with the context you approved and
+`local/workflows/first-task.md` with the steps for repeating the task. The first
+choice also saves the current result and meaningful progress under `local/work/`.
+A checkpoint keeps the current result, confirmed decisions, unresolved questions,
+and next step. The assistant can make these checkpoints during this active task
+and when you ask to pause, within that one choice. It does not save in the background
+or keep a full transcript by default.
 
-It should also explain whether running the workflow will save its results.
-You can choose “Keep this session-only” instead; then there are no personal files
-to carry into a future session. If you already asked it to save, it need not ask again.
+You can say "don't save this" later; that overrides the earlier choice. If you
+already clearly authorized saving, the assistant does not ask again.
 
-Personal files belong under `local/`, which Git ignores by default. This prevents
-ordinary Git commits from including them; it does not encrypt or back them up.
-Your AI tool's data-handling settings still apply. Keep passwords and keys out.
+The first setup keeps context in one profile. When a goal, project detail,
+preference, or relevant person's role would help, the assistant offers to add it.
+Reply in your own words or skip. You do not need to choose filenames or fill in
+all the topics. It shows the proposed note and asks before saving unless you
+already requested that edit. Detailed topics can move to separate files later.
+People notes should contain only what the task needs, and a correction to one
+answer should not become an assumed permanent preference. The assistant checks
+possibly stale or conflicting saved context before relying on it.
+
+Personal files stay in the starter's `local/` folder. Your AI tool's data-handling
+settings still apply. Keep passwords and keys out. If you use Git, the starter's
+ignore rule keeps new personal files out of ordinary commits; already tracked
+files need separate attention. You can use a downloaded folder without Git.
 
 ## 4. Get one useful result
 
@@ -140,56 +120,114 @@ If you already supplied everything and asked it to do the task, it can start
 immediately. No extra approval is needed between ordinary workflow steps.
 
 Check whether the result helped. Ask for a correction if it missed the point.
-For a workflow configured to save, the assistant should give you the path under
-`local/work/`. Open the file to see the result for yourself.
+If you chose to save the result, the assistant reads it back to check the write.
+It tells you which folder holds it, names the latest saved work file, and gives an
+exact reopening message using that file's actual path. Open the file to see the
+result for yourself. If a save only partly succeeds, it reports which files were
+saved and which details remain in chat.
+
+To pause, say "Pause here". If you chose to save progress, the assistant updates
+the current task's checkpoint and gives you the reopening message. In a new chat,
+open the same folder and paste that message. The saved decisions, open questions,
+and next step let it continue; unsaved chat details may be missing.
+
+Local saving does not create a backup. Keep a separate copy of this folder somewhere
+appropriate for its contents. A fresh download of the starter will not contain your work.
 
 Here are three possible starting requests. These are illustrations, not defaults
 or facts about you; choose your own task:
 
-- “Help me turn my reading notes into a short study plan.”
-- “Review my draft and explain the most useful changes.”
-- “Help me plan the next small improvement to my app.”
+- "Help me turn my reading notes into a short study plan."
+- "Review my draft and explain the most useful changes."
+- "Help me plan the next small improvement to my app."
 
 ## Use it again
 
 | What you want | What to say |
 | --- | --- |
-| See what is saved and what to do next | “tiny brain status” |
-| See available workflows | “tiny brain help” |
-| Repeat the first task | “Run my first workflow” |
-| Review what could work better next time | “tiny brain improve” and describe the result or feedback |
-| Change your setup | “Update my profile: I prefer shorter answers. Save that change.” |
-| Save a specific workflow improvement | “Update this workflow to check the deadline before planning.” |
-| Undo a saved improvement | “Undo the improvement that added the deadline check.” |
-| Repeat a new kind of task | “Turn what we just did into a reusable workflow.” |
-| Continue a specific piece of work | “Continue the work in [give the actual file path].” |
-| Stop keeping a preference | “Remove this preference from my saved profile: …” |
+| See what is saved and what to do next | "tiny brain status" |
+| See available workflows | "tiny brain help" |
+| Repeat the first task | "Run my first workflow" |
+| Check a plan or decision from another angle | "Challenge this" or "Take a second look" |
+| Review what could work better next time | "tiny brain improve" and describe the result or feedback |
+| Change your setup | "Update my profile: I prefer shorter answers. Save that change." |
+| Save a specific workflow improvement | "Update this workflow to check the deadline before planning." |
+| Undo a saved improvement | "Undo the improvement that added the deadline check." |
+| Repeat a new kind of task | "Turn what we just did into a reusable workflow." |
+| Continue a specific piece of work | "Continue the work in [give the actual file path]." |
+| Stop keeping a preference | "Remove this preference from my saved profile: …" |
 
 Ordinary questions still work. You do not have to use a workflow every time.
-Your setup persists through the files, so keep the folder and back it up somewhere
-appropriate for its contents. A fresh copy of the starter has none of your setup.
 
-The assistant can use results and your comments to improve future work. “Make this
-shorter” fixes the current answer; “remember this preference” asks it to save a
-lasting change. It proposes other lasting changes for your approval, records saved
-improvements in `local/improvements.md`, and checks whether they help on later
-relevant tasks. Session-only feedback stays in chat unless you ask to save it.
+The [challenge skill](skills/challenge/SKILL.md) checks assumptions, missing
+constraints, the strongest counterargument, and a concrete improvement. The
+assistant may offer a second look for a consequential decision, important plan,
+or weak evidence when useful. It should not offer it for every small answer or
+repeat an offer you declined. A same-assistant second pass is not independent
+verification; it should name any separate review or source check it actually used.
+A review does not authorize acting on the recommendation.
+
+After a correction, repeated complaint, or missed requirement, the assistant uses
+the [feedback-improvement skill](skills/improve-workflow/SKILL.md) to check whether
+a lasting change would help and offer one when supported. You can also say "help
+me improve this workflow". "Make this shorter" fixes the current answer; "remember
+this preference" asks it to save that change. Other lasting changes need your
+approval. You can decline or keep them in chat. Saved improvements have a minimal
+history in `local/improvements.md` and a check on a later relevant task.
 This improves the workspace's instructions and workflows, not the AI model itself.
+
+## Optional: try a simulated demo
+
+With the starter folder open, say "tiny brain demo" or type `/demo` to choose:
+
+- `/demo show` gives a short fictional walkthrough of setup, a sample task, and
+  returning to the work. Use it to explain tiny brain to someone new.
+- `/demo test` starts fresh onboarding for you to try. Answer as a new user, skip
+  optional details, or correct the draft to test how the conversation responds.
+
+The assistant follows the current starter files and labels demo replies. All
+practice setup stays in chat, even if you say "save", "remember", or "run".
+It does not read your existing personal setup, change files, run code or external
+actions, browse the web, call connected services, commit, or push.
+
+To test onboarding, send these as separate messages in the same chat:
+
+1. `/demo test` starts the interview. You do not need `/demo` or `/start` first.
+2. Answer each question normally. When offered a setup, try "Save this setup"
+   and then "Run my first workflow", or choose session-only use. Actions stay simulated.
+3. `/demo review` pauses for feedback on the experience so far. You can use it
+   halfway through; finishing onboarding first is not required.
+4. Reply normally to continue, use `/demo reset` for a fresh attempt, or
+   `/demo exit` to finish. Review before reset or exit if you want feedback on
+   that attempt. Sending `/demo test` again also starts over.
+
+For a presentation, start with `/demo show`. Then optionally review it, switch
+to `/demo test` so the viewer can try it, or exit. Review is optional and keeps
+the current demo open; the commands are not a mandatory sequence.
+
+"tiny brain demo test" also works as ordinary text. If needed, paste:
+
+> Read AGENTS.md and commands/demo.md, then start demo test.
+
+Demo is an instruction for the conversation, not a permission sandbox. Normal
+session-only use can do real tasks without saving a profile; demo simulates file
+and external actions. Leaving demo does not save the practice setup or start real
+work. Say "Start tiny brain" when you want real setup.
 
 ## If something feels wrong
 
 | Symptom | Try this |
 | --- | --- |
-| It does not know how to start | “Read AGENTS.md and follow commands/start.md.” Check you opened the correct folder. |
-| `/start` is unrecognized or opens a tool menu | Say “Start tiny brain” as ordinary text. This starter does not install native slash commands. |
+| It does not know how to start | "Read AGENTS.md and follow commands/start.md." Check you opened the correct folder. |
+| `/start` is unrecognized or opens a tool menu | Say "Start tiny brain" as ordinary text. This starter does not install native slash commands. |
 | `/demo` is unrecognized or opens a tool menu | Say "tiny brain demo" or use the direct file-reading prompt above. |
 | Demo uses an old practice profile | Say "tiny brain demo reset" to begin the same mode fresh. A demo lasts only in its current conversation. |
-| It assumes an industry or location you never supplied | “That is not my context. Follow commands/start.md using only what I've told you.” Check the saved profile for mistaken facts. |
+| It assumes an industry or location you never supplied | "That is not my context. Follow commands/start.md using only what I've told you." Check the saved profile for mistaken facts. |
 | It asks the same questions again | Point it to `local/profile.md`; ask it to continue or update your existing setup. |
 | It insists on setup before answering a simple question | Ask it to re-read the five working rules in `AGENTS.md`. Setup is optional for ordinary tasks. |
 | It cannot save files | Check the selected folder and the tool's file permissions. Review in chat until file editing is available. |
 | It says files exist but you cannot find them | Ask for the actual paths and for it to read the files back. |
-| It forgets during a long chat | Start a fresh chat in the same folder and say “tiny brain status”. Unsaved chat details may not carry over. |
+| It forgets during a long chat | Open a fresh chat in the same folder and paste the last verified reopening message, or say "tiny brain status". Unsaved chat details may not carry over. |
 
 Still getting unrelated questions? Ask the assistant to inspect your saved setup
 and onboarding instructions for copied example facts, then start a fresh chat.

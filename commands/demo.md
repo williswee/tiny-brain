@@ -131,7 +131,7 @@ These answers cover the setup topics, so the real onboarding procedure should
 reuse them instead of repeating questions.
 
 Show the user's input, the resulting small profile and workflow preview, an
-explicitly fictional "Save this setup" reply, and a simulated save. Then show
+explicitly fictional choice to save setup, result, and progress, and a simulated save. Then show
 a sample checklist and how a later request could revise it or resume it from
 simulated state. Use the current procedures and templates for each step.
 Finish with one invitation to try `/demo test`. Stay in demo until exit.

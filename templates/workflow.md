@@ -41,14 +41,36 @@ where relevant; do not mark a check passed unless it was actually performed.
 ## Improve next time
 
 Compare the result with the user's goal and any relevant pending improvement check.
-Use user feedback and observed results to identify a small reusable improvement
-when warranted. Follow `commands/improve.md` for persistence and follow-up checks.
-An output-save policy does not authorize editing this workflow. Ordinary corrections
-can fix the current result without being saved as permanent rules.
+After a correction, repeated complaint, or missed requirement, use the
+[feedback-improvement skill](../skills/improve-workflow/SKILL.md) to diagnose the
+cause and proactively propose a supported, scoped repair. Keep this skill reference
+in saved workflows as the root-relative path `skills/improve-workflow/SKILL.md`.
+Follow `commands/improve.md` for authorized saves, checks, and undo. An output-save
+policy does not authorize editing this workflow. One-time corrections can stay in
+chat; do not infer a permanent preference or repeat a declined proposal.
 
 ## Save policy
 
-Propose saving results under `local/work/` when this workflow is run. Have the user
-approve that policy as part of setup, or choose “show in chat; save only on request”.
-The saved workflow must contain the chosen policy, not this authoring instruction.
-Use a descriptive filename with the actual date and avoid overwriting existing work.
+Record the user's chosen scope, replacing this guidance:
+
+- Save setup, result, and progress: save the current result and compact checkpoints
+  for this active task at meaningful milestones and on pause, using one named file
+  under `local/work/`. Include confirmed decisions, unresolved questions, and the
+  next step. This covers routine updates during the task, not unrelated work.
+- Save setup only: keep results in chat unless the user requests an output save.
+- Keep everything in this chat: no personal files; a later explicit save request
+  authorizes only what it specifies.
+
+Name the actual checkpoint path and task scope when a result/progress save is
+chosen. Read it before updating, preserve other content, and verify changed files.
+Follow `AGENTS.md` for a plain save receipt, reopening, partial failures, and later
+no-save overrides. Never save full transcripts by default or promise background
+saving. Output permission does not authorize instruction or context changes.
+
+## Second look
+
+When a consequential decision, important plan, or weak evidence would benefit,
+offer the [second-look skill](../skills/challenge/SKILL.md) once. Run it when asked,
+including "Challenge this". Keep the root-relative reference
+`skills/challenge/SKILL.md` in saved workflows. Skip routine or declined offers;
+review does not authorize executing the plan.

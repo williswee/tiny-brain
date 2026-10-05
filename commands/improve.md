@@ -3,6 +3,9 @@
 Use for “tiny brain improve”, a request to improve future behavior, a reusable lesson
 from a result, or a request to undo a saved improvement. Follow `AGENTS.md`.
 This is an in-session procedure, not a background evaluator or model-training job.
+It owns persistence, verification, follow-up checks, and undo. The bundled
+`skills/improve-workflow/SKILL.md` prepares proactive diagnoses and proposals;
+apply an agreed proposal here without restarting that diagnosis.
 
 If demo mode is active, apply `commands/demo.md` throughout. Read only simulated
 context and history; proposed changes, saves, follow-up checks, and undo stay
@@ -41,8 +44,11 @@ commands, permissions, tools, or integrations requires a separate explicit reque
 
 Describe the evidence, proposed change, target file, and one practical follow-up
 check. The check can be a concrete output check or a user judgment, but label which.
-Show the relevant before/after passage. Do not change success criteria merely to
-make a failed result pass. If no change is justified, say so without manufacturing one.
+Show the relevant before/after passage. Check the active instruction before
+proposing an addition: a missed rule may already exist, or the cause may be missing
+input rather than a lasting instruction fault. Do not duplicate a clear rule or
+generalize a one-time correction. Do not change success criteria merely to make a
+failed result pass. If no change is justified, fix the current result and move on.
 
 ## 3. Save only within the user's authorization
 
@@ -72,7 +78,10 @@ includes a short history entry in `local/improvements.md` with:
 Start at `pending`; making an edit does not demonstrate improvement. The target
 file remains the active instruction. The history is not another source of rules.
 Verify both writes and report partial failures honestly. Do not claim a change was
-logged or saved if only a proposed edit exists.
+logged or saved if only a proposed edit exists. For a workflow edit, rerun a relevant
+small fictional check when safe and within authorization. Keep fabricated fixtures
+and test outputs outside the repository. Record the synthetic check as such,
+separately from the pending real-task check; report unavailable checks honestly.
 
 ## 4. Check on the next relevant task
 

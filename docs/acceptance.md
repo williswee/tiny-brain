@@ -166,6 +166,55 @@ Run `python3 -B -m unittest discover -s tests -v` for source-contract checks,
 including the operating guidance and workflow output mirror. These checks and
 fictional rehearsals are not proof of live client behavior.
 
+## Feedback-skill checks
+
+The bundled feedback skill is reached from root instructions, help, and the workflow
+template. Structural regression checks verify those paths and the persistence handoff;
+they do not establish that an AI follows the procedure.
+
+Use disposable workspaces outside this repository for behavioral checks. Keep
+fabricated inputs, trial outputs, and evaluation records there, including when testing
+saved files and undo. Cover a reusable instruction gap, a one-time correction, an
+already-present rule, missing evidence, explicit save authorization, refusal or
+chat-only use, setup-draft corrections, and undo after unrelated edits. Check actual
+file changes and preserved content, not just the assistant's claim that it saved.
+
+After an authorized workflow change, exercise a small relevant fictional input and
+distinguish that result from the still-pending check on a real task. Verify minimal
+provenance and before/after history without copying full transcripts or sample inputs
+into personal context. Test that ordinary feedback cannot change shared rules, tools,
+permissions, or integrations. Demo and read-only runs must not write.
+
+The skill creator's validator checks package structure. Independent isolated trials
+add behavioral evidence; neither proves universal adherence or a live-client result.
+
+## Saving, context, and second-look checks
+
+Run behavioral checks in isolated workspaces outside this repository, with no
+credentials or external actions. Keep all fabricated inputs, generated personal
+files, responses, and evaluation evidence outside the repository. Test code and
+reusable checking procedures may live here.
+
+Exercise first use in a plain downloaded folder, including a real useful result
+before the saving choice. Inspect actual saved files for each scope: setup plus
+result/progress, setup only, and chat only. Follow a meaningful milestone and a
+pause with a fresh assistant context that sees only saved state. Check that it
+finds the latest file and continues the same authorized task without reconstructing
+unsaved details. Verify that a later no-save instruction stops checkpoint and
+improvement-history writes. Check truthful partial-save reports and preserve
+unrelated content when resuming. Source wording alone does not prove these behaviors.
+
+Check that skipped context topics don't cause another interview or empty files.
+Any stored context must match the preview and user authorization; inspect the
+facts actually written and their scope. Test a stale relevant fact without
+allowing the assistant to treat its own guess as a confirmed update.
+
+Exercise a direct second-look request, an important plan that merits an offer,
+a trivial answer, and a declined offer. Inspect the actual critique and actions:
+no invented independent reviewer, no unsupported claim of tool verification,
+no execution just because the review recommends it, and no repeated offers after
+a decline. Demo remains simulated and read-only runs remain read-only.
+
 ## Static checks
 
 - All local Markdown links and runtime file references resolve, except clearly

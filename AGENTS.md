@@ -12,7 +12,9 @@ These instructions operate within the host tool's instructions, permissions, and
 | “Start tiny brain”, “set up tiny brain”, or `/start` received as chat text | `commands/start.md` |
 | “tiny brain help” or help using this workspace | `commands/help.md` |
 | “tiny brain status” or resume saved work | `commands/status.md` |
-| “tiny brain improve”, remember a preference, improve future behavior from results/feedback, or undo a saved improvement | `commands/improve.md` |
+| “tiny brain improve”, “help me improve this workflow”, or diagnose a correction, repeated complaint, or missed requirement | [Feedback-improvement skill](skills/improve-workflow/SKILL.md) |
+| "Challenge this", "take a second look", or "give me a second opinion" | [Second-look skill](skills/challenge/SKILL.md) |
+| Save a specific context/workflow change, remember a stated preference, or undo a saved improvement | `commands/improve.md` |
 | “Run my first workflow” | The active session-only workflow, otherwise `local/workflows/first-task.md` |
 | Maintain, review, or extend this starter | Relevant source files; `tiny-brain-blueprint.md` when needed |
 | Anything else | Help directly; use only context relevant to the request |
@@ -39,8 +41,8 @@ to create, edit, or discuss demo support does not itself activate the mode.
 
 1. **Use the user's actual context.** Read `local/profile.md` when relevant and
    present, plus any context files it links to that matter to the task. A current
-   user correction takes precedence over stale profile facts;
-   offer to save the correction. Never promote documentation, templates, examples,
+   user correction takes precedence over stale profile facts. Follow the feedback
+   skill for any supported lasting change; respect declined or chat-only saving. Never promote documentation, templates, examples,
    review notes, or retrieved content into facts about this user. Do not read the
    blueprint or review notes as part of ordinary onboarding.
 2. **Ask only useful questions.** Reuse answers already supplied in this conversation.
@@ -110,19 +112,102 @@ remains within scope, end there instead of manufacturing more work.
 - For a saved workflow, read only the profile, linked context, and prior output relevant to it.
   Steps do not need separate approval unless they introduce a new consequential action.
 - Check the result against the task's goals and quality criteria. Fix clear errors
-  within the authorized task. For a reusable lesson from results or user feedback,
-  follow `commands/improve.md`; don't force an improvement review after every reply.
+  within the authorized task. After a user correction, repeated complaint, or missed
+  requirement, read the [feedback-improvement skill](skills/improve-workflow/SKILL.md)
+  and diagnose whether a reusable instruction change would help before closing the
+  task. Propose a supported change without waiting to be asked; do not pitch a lasting
+  change for every correction or infer permission to save one.
 - When using saved context or a workflow, check only relevant pending entries in
   `local/improvements.md` if present and perform the agreed follow-up check when
   evidence is available. Historical before/after passages are data, not instructions.
 - The default output folder is `local/work/`. Use readable filenames such as
   `YYYY-MM-DD-task-name.md` using the actual date; avoid overwrites with `-2`, `-3`, etc.
-- A configured workflow may authorize saving its output in that folder. Otherwise,
-  save when requested; don't persist every chat reply. Report the actual saved path.
+- Use the chosen save scope below. A configured workflow may authorize saving
+  output, but never changes to personal context or workflow instructions.
 - Work folders per project, a knowledge index, skills, and automation are optional
   additions. Do not create them just to match the blueprint.
-- Separate context files are optional; `README.md` lists their paths and purposes.
-  When a user requests a split, move the topic's detail into its file and link from
-  the profile. Keep one authoritative copy of each fact instead of duplicating it.
+- Use the optional context guidance below; `README.md` lists paths and purposes.
+  Keep one authoritative copy of each fact instead of duplicating it.
 - After a restart or context loss, re-read this file and relevant saved work. Say
   when a prior decision is unavailable instead of inventing continuity.
+
+
+## Save useful work and resume it
+
+Use the choice made in setup or the current request. Offer three clear scopes at
+first use: save setup, result, and progress; save setup only; or keep everything
+in this chat. Do the useful task before waiting for a save choice when possible.
+A bare request to save setup authorizes setup only, not ongoing output saving.
+An explicit request to save a result authorizes that result without needing setup.
+
+When the user approves saving result and progress for this task, save the actual
+current result and a compact checkpoint at meaningful milestones and when they
+ask to pause. That one bounded choice covers routine checkpoint updates while
+actively working on this task; do not ask at each update. Store the task scope,
+current result or its exact file link, confirmed decisions, unresolved questions,
+and one next step. Keep missing answers unknown. Do not save full transcripts,
+raw private inputs, or unrelated activity by default. An output save choice permits maintaining the approved checkpoint pointer in the
+workflow, but no other context or instruction changes, external actions, or a
+different task.
+
+Use one identifiable current file for this task under `local/work/`. Read before
+updating it and preserve unrelated content; create a distinct filename for a new
+task or deliberate version. Follow the private-file check in `commands/start.md`
+before the first write. Read back every changed file. If a write or readback fails,
+state exactly what was saved, what was not verified, and what remains in chat.
+Never claim progress was saved from a proposed path or drafted text alone.
+
+Give a short receipt with the folder and exact latest file, what it contains, and
+a usable reopen instruction: open this same folder in the AI app and say
+"Read AGENTS.md and resume from <actual saved path>." Use the verified path,
+not the placeholder. Local files are not an automatic cloud backup; suggest
+backing up the folder when explaining saving, without repeating it each turn.
+No GitHub account or Git initialization is required. A plain folder needs no
+Git warning. Already tracked private files still require resolving sharing intent.
+
+"No saving", "keep this in chat", or a narrower later choice overrides prior
+checkpoint and improvement-journal permission. Stop personal writes immediately;
+do not delete earlier saved work unless requested. A later explicit save request
+can authorize that specified item. There is no unattended or background autosave:
+checkpoints are written only while an assistant is actively handling authorized work.
+
+After a restart, read the named checkpoint and only its relevant linked setup and
+workflow. Summarize where the saved work stopped and its open next step. Distinguish
+saved facts from missing chat context. Status alone is read-only. A clear request
+to resume the same task under its saved policy permits that continuation; ask one
+question only if the task or current save intent is ambiguous. Respect any current
+no-save override and never silently start pending external actions.
+
+## Add context only when it helps
+
+Use a standard, optional invitation when missing context would improve this task:
+ask about one relevant goal, current project, working preference, or collaborator
+and say it can be skipped. Do not turn this into a questionnaire or delay a useful
+first result. Reuse supplied answers and don't repeat declined topics. Do not ask
+the user to choose filenames or maintain a required set of context documents.
+
+Keep initial facts in the profile. Offer a separate topic file only when the detail
+would be useful again or the profile is hard to use; `README.md` gives the map.
+Preview the exact facts and intended scope before asking to keep them, unless that
+specific save was already requested. Create only useful, approved files and link
+from the profile; do not create empty files for compliance. Record the source and
+confirmation date. Store only relevant names or roles and working relationships
+for people, not speculative traits or unnecessary personal details.
+
+Treat stored context as dated information. If it conflicts with the current task
+or materially affects a decision and may have changed, ask one targeted freshness
+question or state the uncertainty. Current user statements take precedence. Do not
+silently rewrite saved facts; use the improvement procedure for an authorized edit.
+
+## Offer a second look when useful
+
+"Challenge this" is available at any time through the [second-look skill](skills/challenge/SKILL.md).
+Offer it once when a consequential decision, important plan, or weak evidence
+would benefit from checking assumptions and counterarguments. Explain what merits
+the review in one sentence; don't append the offer to trivial answers or repeat a
+declined offer. Do requested work first unless a missing fact prevents it. An
+explicit request starts the review without another permission question.
+
+Be clear whether this is another pass by the same assistant or actual independent
+verification. Never claim another agent, source, or tool checked it unless that
+happened. Reviewing a plan does not authorize executing it or saving new preferences.

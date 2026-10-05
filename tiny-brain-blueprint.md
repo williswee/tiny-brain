@@ -74,6 +74,9 @@ tiny-brain/
   templates/
     profile.md
     workflow.md
+  skills/
+    improve-workflow/SKILL.md
+    challenge/SKILL.md
   local/                       # created on authorized setup; ignored by Git
     profile.md
     workflows/first-task.md
@@ -111,7 +114,11 @@ five behavior rules in plain language:
 
 Routes: “Start tiny brain” and `/start` received as text → `commands/start.md`;
 “tiny brain help” → `commands/help.md`; “tiny brain status” → `commands/status.md`;
-“tiny brain improve” or a request to learn from feedback → `commands/improve.md`;
+“tiny brain improve”, “help me improve this workflow”, or diagnosis after a correction,
+repeated complaint, or missed requirement → `skills/improve-workflow/SKILL.md`;
+an explicit context/workflow save or undo request → `commands/improve.md`;
+"Challenge this", "take a second look", or "give me a second opinion" →
+`skills/challenge/SKILL.md`;
 `/demo` received as text or "tiny brain demo", including its controls, →
 `commands/demo.md`;
 “Run my first workflow” → an active session-only workflow agreed in this conversation,
@@ -167,6 +174,86 @@ it. Reuse authorization already given for the requested work. Demo actions remai
 simulated. Respect "analysis only", "no advice", and "stop"; do not append next
 steps in those cases. When the requested result is complete and nothing useful
 remains within scope, end there instead of manufacturing more work.
+
+### Save useful work and resume it
+
+Use the choice made in setup or the current request. Offer three clear scopes at
+first use: save setup, result, and progress; save setup only; or keep everything
+in this chat. Do the useful task before waiting for a save choice when possible.
+A bare request to save setup authorizes setup only, not ongoing output saving.
+An explicit request to save a result authorizes that result without needing setup.
+
+When the user approves saving result and progress for this task, save the actual
+current result and a compact checkpoint at meaningful milestones and when they
+ask to pause. That one bounded choice covers routine checkpoint updates while
+actively working on this task; do not ask at each update. Store the task scope,
+current result or its exact file link, confirmed decisions, unresolved questions,
+and one next step. Keep missing answers unknown. Do not save full transcripts,
+raw private inputs, or unrelated activity by default. An output save choice permits maintaining the approved checkpoint pointer in the
+workflow, but no other context or instruction changes, external actions, or a
+different task.
+
+Use one identifiable current file for this task under `local/work/`. Read before
+updating it and preserve unrelated content; create a distinct filename for a new
+task or deliberate version. Follow the private-file check in `commands/start.md`
+before the first write. Read back every changed file. If a write or readback fails,
+state exactly what was saved, what was not verified, and what remains in chat.
+Never claim progress was saved from a proposed path or drafted text alone.
+
+Give a short receipt with the folder and exact latest file, what it contains, and
+a usable reopen instruction: open this same folder in the AI app and say
+"Read AGENTS.md and resume from <actual saved path>." Use the verified path,
+not the placeholder. Local files are not an automatic cloud backup; suggest
+backing up the folder when explaining saving, without repeating it each turn.
+No GitHub account or Git initialization is required. A plain folder needs no
+Git warning. Already tracked private files still require resolving sharing intent.
+
+"No saving", "keep this in chat", or a narrower later choice overrides prior
+checkpoint and improvement-journal permission. Stop personal writes immediately;
+do not delete earlier saved work unless requested. A later explicit save request
+can authorize that specified item. There is no unattended or background autosave:
+checkpoints are written only while an assistant is actively handling authorized work.
+
+After a restart, read the named checkpoint and only its relevant linked setup and
+workflow. Summarize where the saved work stopped and its open next step. Distinguish
+saved facts from missing chat context. Status alone is read-only. A clear request
+to resume the same task under its saved policy permits that continuation; ask one
+question only if the task or current save intent is ambiguous. Respect any current
+no-save override and never silently start pending external actions.
+
+### Add context only when it helps
+
+Use a standard, optional invitation when missing context would improve this task:
+ask about one relevant goal, current project, working preference, or collaborator
+and say it can be skipped. Do not turn this into a questionnaire or delay a useful
+first result. Reuse supplied answers and don't repeat declined topics. Do not ask
+the user to choose filenames or maintain a required set of context documents.
+
+Keep initial facts in the profile. Offer a separate topic file only when the detail
+would be useful again or the profile is hard to use; `README.md` gives the map.
+Preview the exact facts and intended scope before asking to keep them, unless that
+specific save was already requested. Create only useful, approved files and link
+from the profile; do not create empty files for compliance. Record the source and
+confirmation date. Store only relevant names or roles and working relationships
+for people, not speculative traits or unnecessary personal details.
+
+Treat stored context as dated information. If it conflicts with the current task
+or materially affects a decision and may have changed, ask one targeted freshness
+question or state the uncertainty. Current user statements take precedence. Do not
+silently rewrite saved facts; use the improvement procedure for an authorized edit.
+
+### Offer a second look when useful
+
+"Challenge this" is available at any time through the [second-look skill](skills/challenge/SKILL.md).
+Offer it once when a consequential decision, important plan, or weak evidence
+would benefit from checking assumptions and counterarguments. Explain what merits
+the review in one sentence; don't append the offer to trivial answers or repeat a
+declined offer. Do requested work first unless a missing fact prevents it. An
+explicit request starts the review without another permission question.
+
+Be clear whether this is another pass by the same assistant or actual independent
+verification. Never claim another agent, source, or tool checked it unless that
+happened. Reviewing a plan does not authorize executing it or saving new preferences.
 
 ## 5. The onboarding contract
 
@@ -299,35 +386,140 @@ Apply corrections to the draft and its related workflow details.
 
 ### Preview, then save within authorization
 
-Reflect the user's chosen task and intended result in one concrete sentence in
-the editable preview. Mark proposed methods and defaults as suggestions, and
-invite corrections before saving. Use the existing save or chat-only decision
-to confirm the brief; do not add a separate task-confirmation gate.
+Read `templates/profile.md` and `templates/workflow.md`. Draft:
 
-Draft one profile and one workflow. Show a compact summary of their content, any
-assumptions, their paths, and whether running the workflow will save output. Ask
-"Save this setup?" only if the user has not already chosen saving or session-only
-use. Honor "no saving" as session-only with output in chat, without another save
-question or automatic output saving. An early save request still needs a usable
-draft and preview first; it does not justify creating partial setup files.
-Accept corrections or session-only use. One setup decision is enough; don't ask
-for each file separately.
+- `local/profile.md`: the user's goal and success criteria when known, first task,
+  relevant background, stated constraints, preferences, and boundaries.
+- `local/workflows/first-task.md`: one workflow tailored to that task, with inputs,
+  a few steps, an output, a quality check, and an explicit local save policy.
 
-Before saving, ensure `/local/` is in `.gitignore`. If Git is installed and this
-folder is inside a Git checkout, verify ignore coverage and check for already-tracked
-private files. An ignore rule does not remove tracked files
-or undo publication; resolve such cases with the user before adding private data.
-Do not rewrite history automatically. Without Git or outside a Git checkout,
-proceed locally without initializing Git. Explain that ignore rules are prepared
-for future use but no version-control privacy check was possible.
+Both routes end with the same short, editable brief: confirmed context, the first
+task and intended result, preferences and limits, and the proposed workflow.
+Reflect the task in one concrete sentence, such as "Turn rough meeting notes into
+an action list, leaving missing owners and dates unknown." Use only the user's
+chosen task; mark any suggested output or method as proposed. Invite corrections
+in this preview before saving. Use the existing save or chat-only decision to
+confirm the brief; do not add a separate task-confirmation gate. Keep
+unknowns and suggested defaults distinct from confirmed facts. Omit personal
+details the user asks to leave out. Show intended paths without dumping blank
+template headings or asking the user to choose filenames.
 
-Save and read back the two files. Mark setup ready only when `purpose` and
-`first_task` have content and the companion workflow exists. Optional blanks are
-allowed. Report partial writes or missing file capabilities honestly.
+#### Choose what to keep
+
+Make the first-use saving choice explicit in the same brief. Show the proposed
+setup paths, the task covered by saving, and the proposed current checkpoint under
+`local/work/`. A checkpoint keeps the current result, confirmed decisions,
+unresolved questions, and the next step. Show which of those items exist now;
+do not invent missing decisions or questions. Say that future checkpoints would
+update this task's file at meaningful milestones or when the user asks to pause,
+only while the assistant is actively working on the task. They do not run in the
+background. Full conversation transcripts are not saved by default.
+
+If no saving choice already covers this scope, ask:
+
+> What would you like to keep?
+>
+> 1. **Save setup, result, and progress.** Keep the setup, the actual result, and a short checkpoint as we work on this task or when you ask to pause.
+> 2. **Save setup only.** Keep the setup; show results in chat unless you ask to save one.
+> 3. **Keep everything in this chat.** Use the setup here without saving personal files.
+>
+> Reply with 1, 2, or 3, or tell me what to change in the brief.
+
+This choice approves only the previewed scope. Reuse an explicit choice already
+given instead of asking again. "Save setup" alone means setup only; a request to
+save one result does not authorize ongoing checkpoints. Record the selected
+policy and task scope in the workflow, with the current checkpoint path when
+applicable. Do not require approval for each routine checkpoint within that scope.
+New tasks, new kinds of retained information, or a wider save scope need their
+own authorization. Saving progress does not authorize unrelated context changes,
+external actions, or saving sensitive source material.
+
+"No saving" selects session-only use with output in chat. Honor it without asking
+again or proposing automatic output saving. A later no-save instruction overrides
+any earlier ongoing-save policy and pending improvement-history updates. It does
+not delete existing files. If saving is requested before a usable draft exists,
+collect only what is needed to form it and show the preview first. Do not create
+a partial setup just because the user requested a save early. In demo, the same
+rule applies to simulated files. Corrections revise the draft; they do not approve
+unrelated facts.
+
+#### Add useful context gradually
+
+Do not require a project name, architecture, persona, mandatory context files,
+custom gates, plugins, a skill library, a GitHub account, or an API connection to
+get started. Keep initial context in the profile. When a goal, project detail,
+working preference, or detail about a collaborator would materially help the
+task, invite that one topic in plain language. Reuse what the user already said
+and accept "skip" without another prompt or an empty file. Ask for only the
+minimum useful information about other people; avoid private details unrelated
+to the work. Do not infer traits or general preferences from one task.
+
+Offer a separate context file only when the detail has become useful to reuse or
+the user requests it. Use the optional map in `README.md` for paths. Propose the
+actual content and its purpose, then get consent before persisting it unless
+that exact change is already authorized. Move approved detail out of the profile
+and link to its one authoritative copy. Do not burden the user with filenames,
+use README illustrations as user facts, or create empty files to complete the map.
+When relevant saved context may be stale, ask about the specific fact before
+relying on it; a correction does not authorize saving other facts.
+
+### Save and verify, or continue without saving
+
+On authorization, ensure `/local/` is covered by the root `.gitignore`. If Git is
+available and this folder is inside a Git checkout, verify the intended paths are
+ignored. If they are already tracked, explain that ignoring does not untrack them
+and resolve sharing intent before saving private data. Do not alter Git history
+or untrack files without direction. If Git is unavailable or this is a plain
+folder such as an extracted ZIP, proceed locally without initializing Git. A
+plain folder needs no GitHub account. Do not warn that it lacks "Git protection";
+Git ignore rules do not provide encryption or a backup.
+
+Create only needed directories and save the authorized setup files. Mark the
+profile's `setup_status` as `ready` only when its `purpose` and `first_task` are
+nonempty and the companion workflow is saved. Unknown optional fields are
+acceptable. With setup-and-progress consent, save an actual result already shown
+in chat into the agreed checkpoint during this same turn. Do not leave the first
+result only in chat after saving its setup. If no result exists yet, save the
+setup and say that the checkpoint will be created when the task produces one;
+do not create an empty checkpoint or claim work was completed.
+
+Keep one current checkpoint per active task under `local/work/`, using a readable
+filename with the actual date and task name. Inspect an existing file before
+updating it. Update only this task's current result, confirmed decisions,
+unresolved questions, next step, and saved scope; preserve unrelated work.
+Keep a link to the checkpoint in the workflow so a later session can find it.
+Do not create a new dated copy at every milestone or overwrite another task's
+output. Use the shared checkpoint rules in `AGENTS.md` during later work.
+
+Read back every written file, including the saved result and checkpoint link.
+Report success only for verified files. If a write or verification fails, name
+what was saved, what is missing or unverified, and the next repair needed. A
+saved setup with an unsaved result is partial progress, not a complete save.
+Preserve that state for repair without rerunning successful writes blindly.
+
+Give a short receipt with the actual saved location, a link to the latest result
+or checkpoint when one exists, and an exact reopening instruction. For example,
+use "Open this same folder in your AI app and say: Resume from <actual checkpoint
+path>." Replace the placeholder with the verified path. If only setup was saved,
+point to the workflow and say that the result remains in chat. Explain once that
+these are files in this folder and that any backup depends on the user's own
+folder backup or sync; do not imply a cloud copy was created or claim to know its
+backup status. Keep Git terminology out of the ordinary receipt unless a real
+tracked-private-file issue needs attention.
+
+For session-only use, keep the draft in the conversation and do not create personal
+files. Override any proposed automatic save policy with "show in chat; save only
+on explicit request". "Run my first workflow" runs this in-conversation draft,
+even if there is no saved file. Explain once that the user will need to supply
+this draft or chat context again in another session. A pasted prompt alone does
+not restore unsaved work.
+If file tools are unavailable, show the draft and explain that saving requires
+opening this folder in a file-capable tool; do not pretend it was saved.
+
 
 Do not rerun a task already completed in the early chat result. Otherwise do the
-first task if it was already requested and inputs are available; if not, recommend “Run my first workflow” and name only the input it needs.
-Do not make the user complete an architecture review before seeing useful output.
+first task if requested and inputs are available; if not, name only the input it
+needs. A useful result matters more than a file inventory.
 
 ### Profile format
 
@@ -350,13 +542,14 @@ files. Populate from user answers, quote YAML strings correctly, and record
 dates when facts are confirmed. `ready` denotes a saved usable setup, not complete
 knowledge of a person. Absence of a profile means not set up, not an error.
 
-Keep initial context together. When the user requests separate files, use
-`local/context/goals.md` for priorities and success criteria, `project.md` for
-background and current work, `constraints.md` for limits, `preferences.md` for
-working style, and `people.md` for relevant roles and collaborators. Move the
-topic's detail out of the profile and link to it; avoid duplicate facts. These files
-are optional and are not created merely to fill a checklist. Include this map and
-the distinction between initial and optional files in the README.
+Keep initial context together. Follow the optional context guidance above: goals,
+project details, constraints, preferences, and people are useful when relevant, not
+mandatory fields. Save only the approved facts, with source and confirmation date.
+Use `local/context/goals.md`, `project.md`, `constraints.md`, `preferences.md`, and
+`people.md` when useful detail warrants a split. Move the detail and link from the
+profile; never create empty files or duplicate facts to complete the map. Record
+the chosen saving mode in the profile and let its workflow own scope and checkpoint
+path. Omit unused optional headings from saved profiles.
 
 ### Demo contract
 
@@ -441,33 +634,70 @@ context, user-owned decisions, uncertainty, and requests for analysis only or to
 stop. A recommendation does not grant permission to execute or save it. Do not
 add follow-up work when the requested result is already sufficient.
 
-The save policy must explicitly say either “save results under `local/work/` when
-run” or “show in chat; save only on request”. Approving setup approves that policy.
-External actions still need their own authorization; a local save policy grants none.
+The save policy records the chosen first-use scope: setup plus result and progress
+for this task, setup only, or chat only. Follow the shared save/resume guidance
+above, including a single current checkpoint, verified writes, bounded consent,
+plain receipts, and current no-save overrides. Output permission does not grant
+permission to change instructions or perform external actions.
 
-Use the actual date and descriptive filenames, such as `YYYY-MM-DD-task-name.md`.
-Avoid overwrites with a numeric suffix. Report the saved path. Do not persist all
-chat messages. For continued work, read the relevant prior file instead of claiming
-the assistant remembers it. Add per-project folders only when multiple projects
-make the flat folder hard to use.
+`commands/help.md` lists actual routes and saved workflows. Explain real starting
+steps before the optional simulated demo, no-GitHub folder use, the three saving
+choices, reopening, optional context, and the two bundled skills. Do not present
+future blueprint ideas as installed capabilities.
 
-`commands/help.md` must list actual commands and saved workflows from disk, explain
-ordinary chat entry phrases, and recommend one next action. It must not advertise
-optional blueprint ideas as installed features.
+`commands/status.md` stays read-only. Start with a named checkpoint, then only the
+relevant profile and workflow; inspect recent filenames only if no current file is
+linked. Report setup state, verified result, confirmed decisions, unresolved
+questions, next step, saved scope, relevant improvement checks, and the exact
+reopen instruction. Missing state stays unknown. Status alone never resumes work.
+For an explicit resume, verify the same-task scope and current consent before
+continuing under the workflow. Do not repeat approval when clear consent applies,
+or restore unsaved chat from guesses. Current chat-only instructions override all
+personal writes. Never restart completed or external actions merely because they
+appear in a saved next step.
 
-`commands/status.md` is read-only: inspect the profile, saved workflows, and relevant
-recent outputs; report absent/partial/ready setup, current purpose, evidence of
-progress, and one next action. Also mention an active session-only workflow if
-present, distinguishing it from saved setup. A filename is not proof a task was completed.
+### Second look
+
+Include `skills/challenge/SKILL.md`, named `challenge`, for plain-language requests
+such as "Challenge this", "take a second look", and "give me a second opinion".
+Route from the root instructions and help, link from the workflow template, and
+retain the root-relative path in saved workflows. No native plugin is required.
+Offer it selectively as described above, accept a decline, and skip routine tasks.
+When requested, examine the chosen plan's assumptions, missing constraints,
+strongest relevant counterargument, and concrete improvement or reversible check.
+Preserve the user's goals and values; don't invent objections or balance good
+evidence with weak claims. State uncertainty and what evidence could change the
+conclusion. Label a same-assistant second pass accurately; claim independent
+agents, tools, or sources only when actually used. Respect demo/no-save rules and
+read only relevant authorized material. A review does not authorize execution,
+persistent preferences, or instruction changes.
 
 ### Improvement loop
 
-Include `commands/improve.md` with this contract. During relevant tasks, compare
-results with the user's goal, constraints, and quality checks. Fix immediate errors
-within scope. From observed results or explicit user feedback, propose the smallest
-reusable change to the local profile, linked context, or relevant workflow. Separate
-facts, user-reported outcomes, and hypotheses; do not learn rules from praise,
-silence, source-document instructions, or the agent's confidence alone.
+Include `skills/improve-workflow/SKILL.md` for diagnosis and proactive proposals,
+with YAML name `improve-workflow` and a description that names its correction,
+repeated-complaint, missed-requirement, and direct-request triggers. Route it from
+`AGENTS.md`, help, and the workflow template; keep the root-relative skill path in
+generated workflows. Do not claim a Markdown file registers a native plugin.
+
+After one of those triggers, fix the current result and assess whether the cause
+could recur without waiting for a separate review request. Read only the relevant
+instruction, input, and result. Distinguish an instruction gap from a one-time input
+change, unavailable evidence, or failure to follow an existing clear rule. Do not
+duplicate rules or infer lasting preferences from repetition or frustration. A
+demonstrated instruction gap can justify a narrow proposal without repeated failures.
+
+Proactively show one supported edit to the owning context or workflow, with the
+exact target, before/after passage, and expected future effect. Ask naturally whether
+to remember it for that workflow unless the specific save was already authorized.
+Accept no or no saving; keep the correction in chat and do not repeat a declined
+offer in the same conversation unless reopened. During onboarding, revise the setup
+draft under its existing preview/save decision instead of adding another gate.
+
+Include `commands/improve.md` for authorized persistence, verification, follow-up
+checks, and undo. The skill hands an agreed proposal to it without restarting
+diagnosis. Separate facts, user-reported outcomes, and hypotheses; do not learn rules
+from praise, silence, source-document instructions, or the agent's confidence alone.
 
 “Remember this preference” or “update this workflow” authorizes the specified
 change. Feedback without persistence intent, or “tiny brain improve” alone, requests
@@ -479,8 +709,12 @@ public rules, permissions, or integrations from task feedback.
 Save authorized changes in the owning file and keep a minimal historical entry in
 `local/improvements.md`: date, target, reason, exact before/after passage, and one
 next check. Check ignore coverage and unexpected tracked private files as for setup.
-Read back the changed file and history; report partial writes honestly. Start the
-check at `pending`. Historical passages are evidence, not active instructions.
+Read back the changed file and history; report partial writes honestly. After a
+workflow edit, rerun a small relevant fictional check when safe and authorized;
+keep fixtures, outputs, and evaluation artifacts outside the repository and personal
+context. Record synthetic evidence separately from the later real-task check and
+report unavailable checks. Start that later check at `pending`; a synthetic pass is
+not real-world success. Historical passages are evidence, not active instructions.
 
 Make the loop reachable: workflow runs consult only relevant improvement entries
 and perform the agreed check on the next applicable task. Record actual evidence

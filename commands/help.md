@@ -9,19 +9,34 @@ Do not present planned blueprint features as installed capabilities.
 
 Explain these ordinary chat phrases briefly:
 
+- **Start tiny brain**: create or update the small setup. For a fresh start,
+  choose Quick to begin with a task, Guided for an optional introduction, or
+  See an example. A task already supplied skips the route choice. Both routes
+  end with an editable brief and a choice to save setup/result/progress for this
+  task, save setup only, or keep everything in chat.
+- **tiny brain status**: read saved setup and the latest relevant checkpoint,
+  show what is complete or unresolved, and give the exact file to reopen.
+- **tiny brain improve** or **help me improve this workflow**: use the
+  [feedback-improvement skill](../skills/improve-workflow/SKILL.md) to diagnose a
+  result and propose a scoped fix. The assistant also uses it after a correction,
+  repeated complaint, or missed requirement when a lasting change may help.
+  Proposals need save authorization; you can decline or keep them in chat.
+- **Run my first workflow**: uses the active session-only draft, if agreed in this
+  conversation; otherwise uses `local/workflows/first-task.md` when it exists.
+
+- **Challenge this** or **take a second look**: use the
+  [second-look skill](../skills/challenge/SKILL.md) to test assumptions, missing
+  constraints, counterarguments, and possible improvements. A second pass by the
+  same assistant is labeled as such; it is not independent verification.
 - **tiny brain demo** or `/demo`: choose a quick fictional walkthrough or test
   the real onboarding flow with simulated saves and actions. Use `/demo show`
   or `/demo test` to choose directly; `/demo review`, `/demo reset`, and
   `/demo exit` review, restart, or end the rehearsal.
-- **Start tiny brain**: create or update the small setup. For a fresh start,
-  choose Quick to begin with a task, Guided for an optional introduction, or
-  See an example. A task already supplied skips the route choice. Both routes
-  end with an editable brief before saving; session-only use is available.
-- **tiny brain status**: summarize saved setup and recent work.
-- **tiny brain improve**: review a result and feedback, and propose a small change
-  to future behavior. A proposal is saved only when authorized.
-- **Run my first workflow**: uses the active session-only draft, if agreed in this
-  conversation; otherwise uses `local/workflows/first-task.md` when it exists.
+
+No GitHub account is needed to use a downloaded folder. Start with a real task;
+demo is an optional simulation. Context questions are optional and can be skipped.
+For saved work, explain how to reopen the same folder and name the latest verified
+file. Local saves need a separate backup if the user wants one.
 
 When explaining demo usage, give a sequence, not just a list of commands:
 

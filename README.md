@@ -4,7 +4,62 @@ tiny brain gives your AI assistant a set of Markdown files for your goals, prefe
 
 Choose a quick start with a task, or a guided introduction so the assistant can get to know you first. Both lead to a short profile and workflow you can review before saving. You use these files through Codex, Claude Code, or Cursor.
 
-## Try it before setup
+## Start here
+
+You do not need a GitHub account or Git. Download the [starter folder](https://github.com/williswee/tiny-brain) with **Code > Download ZIP**, extract it, and open that folder in Codex, Claude Code, or Cursor. Use an AI app that can read and write files. Sign-in and any usage charges depend on your app, account, and provider; check those with the app before starting.
+
+Start a chat in that folder and say:
+
+> Start tiny brain
+
+If the assistant does not find the instructions, paste:
+
+```text
+Read AGENTS.md and follow commands/start.md to help me set up tiny brain. Ask the first unanswered question now, including the route choices if I haven't supplied a task or route and have no setup to resume.
+```
+
+### Let your assistant fetch the starter
+
+If you prefer, create an empty local project folder in your AI app, open a chat in it, and paste this prompt:
+
+```text
+Set up tiny brain in this project using this repository:
+https://github.com/williswee/tiny-brain
+
+Read its README and copy the starter files, including .gitignore, into this folder. Preserve any existing work. Follow AGENTS.md and commands/start.md to help me set up tiny brain. In your first reply after verifying the copy, ask how I'd like to start: Quick: give me a task, Guided: get to know me, or See an example. Briefly explain each choice and tell me to reply with its number, label, or my own words. Don't stop at a file-copy report or a "ready" message. If I've already given you a task, chosen a route, or started a setup draft, continue with the next unanswered topic instead. Ask about one topic at a time and use answers I've already given. Show me the proposed personal setup before saving it.
+```
+
+You can use the same prompt in Claude Code or Cursor with an empty folder open and file access enabled.
+
+For a fresh setup with no task or route supplied, the assistant's first reply after copying the files should ask how you'd like to start and show these choices:
+
+| Choice | What happens |
+| --- | --- |
+| Quick: give me a task | Start with a note, draft, or something that's stuck, then review a small task and setup. If your request already includes a task, the assistant uses it. |
+| Guided: get to know me | Share an optional introduction, then find one small task with the same help as Quick. Skip anything you've already answered. |
+| See an example | See a short fictional example before choosing your own task or guided setup. |
+
+The assistant asks about one topic at a time and reuses answers you already gave. Choose an option when clickable choices are available, or type your own answer. You can say "not sure", skip questions, correct the brief, or keep the setup only in this chat. No name or job is required.
+
+These are ordinary chat messages, so you do not need a slash command. If the assistant cannot retrieve the repository, use the ZIP steps above.
+
+### Choose what to keep
+
+The assistant shows your proposed setup before saving and asks which option you want:
+
+| Choice | What it keeps |
+| --- | --- |
+| Save setup, result, and progress | Your reviewed setup, the actual task result, and useful checkpoints for this active task. A checkpoint records the current result, confirmed decisions, open questions, and next step. |
+| Save setup only | Your reviewed profile and workflow. Task results stay in chat unless you later ask to save them. |
+| Keep everything in this chat | No personal setup, result, or progress files. You can still do the real task. |
+
+The first choice covers meaningful checkpoints while the assistant is working on this task and when you ask to pause. It does not run in the background or save a full transcript. You can later say "don't save this" to override it. An earlier clear saving choice does not need another approval.
+
+After a save, the assistant checks the files and gives you the folder, the saved files, and the exact message to continue in a new chat. If a result is saved, it identifies the latest work file. If you saved setup only, it says the task result is still in chat. If only part of the save worked, it tells you what is saved and what remains in chat. Keep the same folder and back it up somewhere suitable for its contents. A downloaded folder works without Git; local saving is separate from backup.
+
+See the [quickstart](tiny-brain-quickstart.md) for your first session and troubleshooting.
+
+## Optional: try a simulated demo
 
 Open this repository's folder in your AI tool and type `/demo`, or say "tiny brain demo". Choose how you want to try it:
 
@@ -40,41 +95,6 @@ Read AGENTS.md and commands/demo.md, then start demo test.
 ```
 
 Demo is a conversational instruction, not a permission sandbox. The tool's controls still apply. Normal session-only setup can do real tasks without saving a profile; demo simulates file and external actions throughout.
-
-## Start here
-
-1. In Codex, create a local project with an empty folder on your computer, such as `tiny brain`.
-2. Open a chat in that project.
-3. Copy and paste this prompt into the chat:
-
-```text
-Set up tiny brain in this project using this repository:
-https://github.com/williswee/tiny-brain
-
-Read its README and copy the starter files, including .gitignore, into this folder. Preserve any existing work. Follow AGENTS.md and commands/start.md to help me set up tiny brain. In your first reply after verifying the copy, ask how I'd like to start: Quick: give me a task, Guided: get to know me, or See an example. Briefly explain each choice and tell me to reply with its number, label, or my own words. Don't stop at a file-copy report or a "ready" message. If I've already given you a task, chosen a route, or started a setup draft, continue with the next unanswered topic instead. Ask about one topic at a time and use answers I've already given. Show me the proposed personal setup before saving it.
-```
-
-You can use the same prompt in Claude Code or Cursor with an empty folder open and file access enabled.
-
-For a fresh setup with no task or route supplied, the assistant's first reply after copying the files should ask how you'd like to start and show these choices:
-
-| Choice | What happens |
-| --- | --- |
-| Quick: give me a task | Start with a note, draft, or something that's stuck, then review a small task and setup. If your request already includes a task, the assistant uses it. |
-| Guided: get to know me | Share an optional introduction, then find one small task with the same help as Quick. Skip anything you've already answered. |
-| See an example | See a short fictional example before choosing your own task or guided setup. |
-
-The assistant asks about one topic at a time and reuses answers you already gave. Choose an option when clickable choices are available, or type your own answer. You can say "not sure", skip questions, correct the brief, or keep the setup only in this chat. No name or job is required.
-
-If you already have the files, open their folder in your AI tool. If you downloaded a ZIP, extract it first. Then paste:
-
-```text
-Read AGENTS.md and follow commands/start.md to help me set up tiny brain. Ask the first unanswered question now, including the route choices if I haven't supplied a task or route and have no setup to resume.
-```
-
-Once the files are in place, you can also say "Start tiny brain". These are ordinary chat messages, so you do not need a slash command. If the assistant cannot retrieve the repository, download it from GitHub with **Code > Download ZIP** and follow the steps above.
-
-See the [quickstart](tiny-brain-quickstart.md) for using a downloaded copy, your first session, and troubleshooting.
 
 ## What you get
 
@@ -345,12 +365,11 @@ flowchart TD
 
 Context records your goals, preferences, and relevant facts. A workflow lists the steps and checks for a task. Sources and previous work help the assistant check claims and continue unfinished work. It reads the files relevant to your request and can work without the optional context files.
 
-You choose whether to save the setup, a task's output, or a change for future tasks.
-The assistant should not ask you to approve something you have already authorized.
+Your first-use saving choice covers setup, output, and progress for the current task, or keeps some or all of them in chat. A change to your context or workflow for future tasks still needs your approval. The assistant should not ask you to approve something you have already authorized.
 
 ## How it improves over time
 
-The assistant can use results and your feedback to change a context file or workflow. For example, if a plan misses a deadline, you can ask it to add a deadline check to that workflow. This changes the instructions it reads on future tasks. It does not retrain the AI model.
+The assistant uses the [feedback-improvement skill](skills/improve-workflow/SKILL.md) after a correction, a repeated complaint, or a missed requirement. It fixes the current result, checks whether an instruction caused the problem, and offers a specific repair when one would help. You do not need to know to ask for an improvement review. It shows the owning file and the proposed before/after change, explains what that would change next time, and asks before saving unless you already requested that edit. This changes the instructions it reads on future tasks. It does not retrain the AI model.
 
 The diagram shows how the assistant decides what to change and checks whether the
 change helped on a later task.
@@ -396,17 +415,27 @@ flowchart TD
 | "The plan missed the deadline. Add a deadline check to this workflow." | Update that workflow and check the next plan against its deadline. |
 | "This task took twice as long as the plan allowed." | Review the estimate and propose an adjustment to try. One result is not enough to establish a general rule. |
 
-Say "tiny brain improve" to review a recent result and your feedback. The assistant should explain when there is no useful change to make. Praise, silence, and the assistant's confidence do not prove that a workflow is better.
+Say "tiny brain improve" or "help me improve this workflow" to invoke the same skill directly. A rule that was ignored may need to be followed and checked, not duplicated. A one-time correction is not automatically a lasting preference. You can decline a proposed change or keep it in chat; the assistant should not repeat that offer in the same conversation unless you reopen it. Praise, silence, and the assistant's confidence do not prove that a workflow is better.
 
 The context or workflow file holds the current instruction. The assistant records saved changes in `local/improvements.md`, along with their reasons and follow-up checks. You can ask it to revise or undo a specific change. If you keep the session in chat only, the assistant writes no feedback or history files unless you ask.
 
-The assistant checks results while you work with it. You must report outcomes it cannot see, such as whether you finished a planned task, or connect a service that provides them. The starter does not monitor outcomes in the background.
+The assistant verifies authorized edits and keeps a minimal change history for undo. A small fictional check can catch a regression, but it does not prove that future real work will succeed. Test inputs and outputs stay outside the repository and personal context. The assistant checks the agreed result again on a later relevant task; you must report outcomes it cannot see. The starter does not monitor outcomes in the background.
+
+The skill is bundled Markdown, explicitly routed through `AGENTS.md`, help, and workflow instructions. It needs no native plugin installation. Those entry points and tests make the behavior inspectable; they cannot guarantee that every AI client will follow it.
+
+## Take a second look
+
+Say "Challenge this" or "Take a second look" with a plan, decision, or answer to use the [challenge skill](skills/challenge/SKILL.md). It checks assumptions, missing constraints, the strongest counterargument, and a concrete improvement. The assistant may offer it for a consequential decision, important plan, or weak evidence when another pass would help. It should not offer it after every answer or repeat a declined offer.
+
+A second pass by the same assistant is not independent verification. The assistant says what it checked and whether it actually used other evidence or a separate reviewer. Reviewing a recommendation does not authorize carrying it out.
 
 ## Your context files, explained
 
 A context file is a note the assistant reads when it is relevant to your request. The first setup keeps your context in `local/profile.md`. The assistant drafts it for you.
 
-You can later ask the assistant to move detailed topics into the optional files below. It creates them when you request them.
+The assistant offers to add context when it would help the current work: a goal, project detail, working preference, or a relevant person's role. You can answer in ordinary words or skip. It handles the filenames and shows the proposed note before saving it. It does not require a questionnaire or create empty files to complete a checklist.
+
+Keep the first setup small. Move a topic into a separate file only when the detail becomes useful. A correction to one answer is not automatically a personal preference. For people, include only the roles or details the task needs; real names are optional. When saved context may be out of date or conflicts with what you just said, the assistant checks before relying on it.
 
 | Context file | What it means | When it is created |
 | --- | --- | --- |
@@ -434,6 +463,8 @@ Other locations support your context:
 | [AGENTS.md](AGENTS.md) | Short instructions for the assistant |
 | [CLAUDE.md](CLAUDE.md) | Imports the same instructions for Claude Code |
 | [commands/](commands/) | Setup, demo, help, status, and improvement procedures |
+| [skills/improve-workflow/](skills/improve-workflow/) | Bundled skill for proactive feedback diagnosis and scoped improvement proposals |
+| [skills/challenge/](skills/challenge/) | Bundled skill for a second look at a plan, decision, or answer |
 | [templates/](templates/) | Blank starting formats, with no sample user's profile |
 | `local/` | Your profile, workflows, and work. Created when you save setup and ignored by Git |
 | [tiny-brain-quickstart.md](tiny-brain-quickstart.md) | Beginner guide |
@@ -443,7 +474,7 @@ Other locations support your context:
 
 ## Your data
 
-The assistant saves personal setup and output under `local/` by default. Git ignores that folder, but this does not encrypt or back it up. Your AI provider may process files the assistant reads according to your tool's settings. Keep passwords and API keys out of your profile. The starter collects no usage data and runs no background jobs.
+The assistant saves the personal setup, output, and progress you authorize under `local/`. Keep that folder to reopen your work, and make a separate backup. If you use Git, the included `.gitignore` excludes new personal files from ordinary commits. Files already tracked by Git need separate attention; adding an ignore rule does not untrack them. Neither local saving nor Git exclusion encrypts your files. Your AI provider may process files the assistant reads according to your tool's settings. Keep passwords and API keys out of your profile. The starter collects no usage data and runs no background jobs.
 
 To share a workflow, ask the assistant to make a separate copy with personal details removed. Review that copy before publishing it.
 
