@@ -38,9 +38,14 @@ The runtime verification table above includes demo behavior. Adding these
 instructions does not verify them in any client. Demo test helps assess the
 conversation; it does not test actual file writes, permissions, or integrations.
 
+Onboarding uses clickable choices when the current host and mode support them.
+Otherwise it shows a numbered list and accepts a number, label, or free text.
+Buttons are optional; the same Quick and Guided routes work through ordinary chat.
+
 ## Recover from unrelated onboarding questions
 
-The revised starter begins with the user's purpose. If an older generated repo
+The starter offers a task-first or guided introduction and uses only the context
+the user supplies. If an older generated repo
 asks about a domain the user did not choose:
 
 1. Inspect that repo's instruction files, setup command, and saved profile. Look

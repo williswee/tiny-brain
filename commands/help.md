@@ -13,7 +13,10 @@ Explain these ordinary chat phrases briefly:
   the real onboarding flow with simulated saves and actions. Use `/demo show`
   or `/demo test` to choose directly; `/demo review`, `/demo reset`, and
   `/demo exit` review, restart, or end the rehearsal.
-- **Start tiny brain**: create or update the small setup.
+- **Start tiny brain**: create or update the small setup. For a fresh start,
+  choose Quick to begin with a task, Guided for an optional introduction, or
+  See an example. A task already supplied skips the route choice. Both routes
+  end with an editable brief before saving; session-only use is available.
 - **tiny brain status**: summarize saved setup and recent work.
 - **tiny brain improve**: review a result and feedback, and propose a small change
   to future behavior. A proposal is saved only when authorized.

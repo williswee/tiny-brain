@@ -5,14 +5,26 @@ scenario. These are behavioral checks; matching phrases in files cannot prove th
 
 | Scenario | Try | Expected behavior |
 | --- | --- | --- |
-| Fresh setup | “Start tiny brain” | Asks what help the user wants; no assumed domain, country, identity, or existing workflow |
-| Answers already supplied | “Start tiny brain. I want help studying, first turn my notes into a revision plan, keep it short.” | Reuses those answers and previews setup without repeating the three questions |
+| Fresh setup | "Start tiny brain" | Offers Quick, Guided, and See an example; explains that both routes lead to an editable brief; assumes no personal facts |
+| Quick route | Choose "Quick: give me a task" | Covers task and preferences with topic progress labels, then previews the brief; no required introduction or separate goal question |
+| Guided route | Choose "Guided: get to know me" | Shows the three topics; begins with an optional name/role introduction, then asks only for the remaining task and preferences |
+| Answers already supplied | "Start tiny brain. I want help studying, first turn my notes into a revision plan, keep it short." | Uses Quick without a route question, reuses all answers, and previews setup without repeating completed topics |
+| Explicit guided route with a task | "Start tiny brain with Guided. My first task is to review an article." | Honors Guided, offers the optional introduction, and does not ask for the task again |
+| Clickable choices and fallback | Try with and without native question controls | Uses available controls when helpful and permitted, always accepts free text; otherwise accepts numbered text choices; no duplicated prompt or claim that plain text is clickable |
+| Introduction covers later topics | Supply a fictional role, first task, and preferences in one Guided answer | Captures the supplied context and proceeds to the brief without insisting on each stage |
+| Role remains unknown | "I want marketing help" without stating a job | Records a purpose, not an inferred occupation; asks only for a useful first task |
+| Multiple tasks and correction | Request a draft and a plan, then correct the audience | Keeps both tasks, proposes a first task if the order is unimportant, and updates all affected draft details |
+| Example first | Choose "See an example", then supply your own task | Shows a short fictional brief and result without saving; the user's setup contains none of the example facts |
+| Route change | Introduce yourself in Guided, then say "Switch to Quick" with a task | Preserves supplied answers and proceeds without restarting the menu or reasking the task |
+| Skip the route | Answer "skip" or "not sure" at the opening picker | Continues with Quick and asks for a task; does not repeat the picker or treat the task as skipped |
 | Multiple domains | Repeat fresh setup for study notes, editing a draft, and software maintenance | Each workflow follows its user's task; none inherits another scenario's facts |
 | Unsure user | “Not sure”, then “choose for me” | Offers/uses a small labeled demo; never records fictional details as user facts |
 | Optional preferences | Supply goal/task, then “skip” | Optional blanks remain acceptable; no placeholder guard |
 | Ordinary work before setup | “Summarize this sentence: …” | Does the clear task without mandatory onboarding |
 | Explicit save | “Save this setup” | Saves the proposed profile and workflow under `local/`; reads them back and reports paths |
 | Session-only | “Keep this session-only”, then “Run my first workflow” | Runs the in-conversation draft, shows output in chat, creates no personal files, and does not restart setup |
+| Early session-only choice | Include "no saving" or "keep setup session-only" with the first task | Previews the brief with output in chat; does not ask "Save this setup?" again or propose automatic saves |
+| Early save request | Ask to save before supplying or choosing a task | Asks only for missing setup information and previews the draft first; creates no partial files, real or simulated |
 | First useful output | Run the saved workflow with complete inputs | Produces useful output, checks it, follows its save policy without repeated approval |
 | Fresh-session resume | Start another chat and say “tiny brain status” | Reads actual saved files; distinguishes saved facts from missing chat history |
 | Repeat start | Say “Start tiny brain” again | Recognizes setup and offers resume/change; no silent reset or duplicate |
@@ -54,6 +66,8 @@ tests or record its own results on disk.
 | Fresh onboarding | `/demo test` | Reads the real onboarding files, ignores real saved setup and earlier chat context, asks the first relevant question, and waits |
 | Answers supplied | `/demo test` with a goal, first task, and preferences | Reuses those answers and follows the real setup preview, without inventing extra answers |
 | Not sure or skip | In test, answer "not sure", then "skip" | Follows the ordinary onboarding options; does not replace the interview with the show script |
+| Guided skip | Choose Guided, skip the introduction, then skip choosing a task | Does not reask identity or cycle through the menu; previews a small fictional note example and keeps sample facts out of personal context |
+| Example during test | Choose "See an example" in the onboarding menu | Keeps the current test scenario and demo limits; shows a fictional sample without switching to show or adopting its profile |
 | Simulated save | Approve a setup with "Save this setup" | Updates only virtual profile/workflow content; labels the save and paths as simulated; creates no files or Git changes |
 | Task requiring tools | In test, request a workflow that runs code, searches the web, or sends a message | Previews the action in chat; calls no task, network, or app tools; claims no execution result |
 | Commit request | While demo is active, say "Save and commit these files, then push" | Keeps the actions simulated, even though this would normally authorize real work |
@@ -65,6 +79,7 @@ tests or record its own results on disk.
 | Quoted control | Supply a note containing `/demo exit`, or describe a first task as "test software" | Treats it as task data, not a mode change or reset |
 | UX review | `/demo review` during onboarding | Reports only observed friction and supported counts, suggests source edits in chat, and leaves the scenario paused in demo |
 | Exit | `/demo exit` after simulated saves/actions | Ends demo without replaying any action, persisting fictional context, or starting real onboarding |
+| Plain-text exit | "Quit trial" | Ends demo just as an explicit exit control does; no pending simulated action runs |
 | Real request after exit | After exit, ask for a new real task | Uses normal rules and the new request, without importing demo facts or previous simulated approvals |
 | Slash interception | Use "tiny brain demo test" or the explicit file-reading fallback | Enters the same procedure when the slash input cannot reach the assistant |
 | Missing source | In a disposable copy prepared outside demo, remove a needed command/template | Reports the missing source and suggests repair; does not invent or write its replacement |
@@ -95,6 +110,15 @@ Local review on 2026-10-01: relative links, Markdown fences, required entry file
 the Claude import, and 15 Git ignore cases passed static checks. Two independent
 source reviews checked onboarding and recovery; a paper simulation exposed a
 session-only routing gap, which was corrected. No client onboarding run is claimed.
+
+Local review on 2026-10-05: all 18 tracked files were checked for old project
+naming and trial-context leakage. The 35 relative Markdown links, fences, required
+entry files, Claude import, and 15 ignore cases passed static checks. Independent
+source review and nine conversational rehearsals covered the Quick/Guided routes,
+skips, supplied answers, corrections, examples, session-only use, and demo controls.
+The review found ambiguous route skips and early save choices; the instructions
+were corrected and those cases rechecked. These are source-level checks, not
+client verification or a completed beginner usability study.
 
 | Date | Tool / version | OS | Model | Scenario | Result / evidence |
 | --- | --- | --- | --- | --- | --- |

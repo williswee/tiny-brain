@@ -27,7 +27,7 @@ For a presentation, use `/demo show`, then optionally review, switch to test
 for hands-on onboarding, or exit. These are choices, not mandatory phases.
 
 Accept the same controls as ordinary text, such as "tiny brain demo test",
-"review this demo", "reset demo", and "exit demo". If a host intercepts slash
+"review this demo", "reset demo", "exit demo", and "quit trial". If a host intercepts slash
 input, use "Read AGENTS.md and commands/demo.md, then start demo test."
 These files do not register native slash commands. For an unknown option, show
 the valid choices without leaving demo or starting real work.
@@ -68,6 +68,9 @@ push, send, install, or change the starter while demo is active.
   requests, integrations, messages, payments, scheduling, or other real actions.
   Describe the proposed action and show a chat preview where useful. No tool
   call may carry out a simulated action, even for an apparently harmless task.
+- Host-native question controls may collect the tester's answers when available
+  in the current mode. They do not authorize any task action. Otherwise use the
+  text-choice fallback in `commands/start.md`.
 - Chat drafting and reasoning over supplied or clearly fictional inputs are
   allowed. Label sample results as previews. If an outcome requires real
   execution or unavailable evidence, say it was not checked. Never invent a
@@ -138,8 +141,10 @@ Finish with one invitation to try `/demo test`. Stay in demo until exit.
 Begin `commands/start.md` with an empty simulated workspace. Do not import the
 show example, choose a domain, invent a persona, or answer on the user's behalf.
 Reuse answers in the entry request. Otherwise ask the first relevant onboarding
-question and wait. Follow the real procedure's question order, previews, save
-decision, session-only branch, and first-task handoff.
+question and wait. Quick and Guided are onboarding routes within test, not new
+demo variants. "See an example" shows only the onboarding example, without
+resetting the scenario or entering show mode. Follow the real procedure's question
+order, previews, save decision, session-only branch, and first-task handoff.
 
 Keep the conversation as close as possible to normal onboarding, apart from
 the demo marker and clear simulated-action labels. Do not explain what response

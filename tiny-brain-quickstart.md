@@ -77,20 +77,21 @@ and external actions. After leaving demo, continue below when you want real setu
 
 > Start tiny brain
 
-The assistant should ask:
+Choose a way to begin:
 
-> What would you like your AI assistant to help you with?
+- **Quick: give me a task.** Describe one useful thing you want done, then add any
+  preferences. The assistant moves straight to this route if you already gave a task.
+- **Guided: get to know me.** Start with "What should I call you, and what do you
+  do?" Your name is optional. Then choose a first task and add any preferences.
+- **See an example.** See a short fictional setup and result before trying your own.
 
-If you already gave it your goal, it should move on instead of asking again.
-It will cover only three setup topics:
+Quick covers two topics; Guided covers three. The assistant shows your progress,
+asks one topic at a time, and skips what you already answered. Both end with a
+short brief you can edit. These are topic counts, not a fixed number of messages.
 
-1. What you want help with.
-2. One useful task to try first.
-3. Constraints and preferences: limits such as time or tools, things to avoid,
-   and how you like answers presented. You can skip details that do not matter.
-
-“I'm not sure yet” is a valid answer. The assistant can help you choose a small
-task. No name, job, country, or detailed personal profile is required.
+Click a choice if your tool offers buttons, or type its number, label, or your own
+answer. "I'm not sure yet" and "skip" are valid answers. The assistant can help
+you choose a small task. No name, job, country, or detailed profile is required.
 
 ## 3. Review the small setup
 

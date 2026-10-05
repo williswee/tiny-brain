@@ -23,31 +23,95 @@ requested, proceed with it. Never reset or overwrite existing work silently.
 ## 2. Learn the minimum
 
 Use answers already provided in the active conversation. Ask only unanswered
-topics, normally one topic per turn. Use the user's language and ordinary text;
-native question widgets are optional. Accept free text, “skip”, and “not sure”.
+topics, one topic per turn. Acknowledge relevant details briefly instead of
+repeating the whole brief after every answer. Accept free text, "skip", and
+"not sure" throughout. Never require a name or job to proceed.
 
-1. **Goal:** “What would you like your AI assistant to help you with?”
-2. **First task:** “What's one useful thing you'd like it to do first?”
-3. **Constraints and preferences:** “Any limits or preferences I should respect—for
-   example, time available, tools to use, things to avoid, or how you'd like me to
-   respond? You can skip this.”
+### Choose how to begin
 
-For the goal and first task, capture what a useful result would look like and any
-relevant background already supplied. Ask about success or constraints only if
-missing information would change the task. Do not demand a goal metric, deadline,
-budget, or personal details just to fill a field.
+For fresh setup with no task or route already supplied, offer:
 
-No industry, country, currency, job, expertise level, or project type is assumed.
-Ask a domain-specific follow-up only when the user's answer makes it relevant to
-the chosen task. A name, employer, budget, location, and personal history are not
-required setup fields. Don't turn the three topics into a larger questionnaire.
+> Choose a quick start or a guided setup. Both end with a short brief you can edit
+> before deciding whether to save it.
 
-If the goal is unclear, offer a few small task types: organize a note, plan a task,
-or review a draft. Let the user choose or describe something else. If they say
-“choose for me” or skip both goal and task, use “Explore how this workspace works”
-and an explicitly labeled demo that organizes a short fictional note. Demo content
-is not a fact about the user. Optional preferences default to concise, friendly
-responses with no additional boundaries specified by the user.
+- **Quick: give me a task** starts with what the user wants done.
+- **Guided: get to know me** starts with an optional introduction.
+- **See an example** shows a short fictional input, setup brief, and sample result
+  in chat. Ask for the user's own task or offer guided setup afterward. Do not
+  adopt the example as their profile, save it, or change the active demo mode.
+  If requested midway through setup, keep the draft and resume its next missing
+  topic afterward.
+
+Use a native clickable question control when the host supports it in the current
+mode and choices would help. Always allow a typed answer. Otherwise show a short
+numbered list and accept its number, label, or free text. Present each question
+once; do not repeat the same prompt in a separate message after a question control.
+No widget is required to continue, and text labels alone are not clickable buttons.
+
+If the setup request already supplies a task, use Quick without asking for a route,
+unless the user explicitly requests Guided. An existing draft resumes at the next
+unanswered topic without this menu. Switching routes preserves completed answers.
+If the user skips the route choice or is unsure, continue with Quick and ask for
+the first task. Skipping the route does not also skip choosing a task.
+An ordinary task outside setup still follows `AGENTS.md` without an interview.
+
+### Quick
+
+Explain the length once: "We'll cover your task and preferences, then review a
+short brief. You can skip any question." Use `1 of 2: Your first task` and
+`2 of 2: Preferences` only when asking about those topics. Skip completed topics.
+
+Ask: "What's one useful thing you'd like help with first?" Reuse any task already
+given. Extract the purpose, desired result, and relevant background from the
+answer. A clear first task is enough; do not add a separate goal question merely
+to fill the profile. If a useful setup preview needs clarification, ask the one
+missing detail that matters most. Leave execution inputs for when the task runs
+unless they change the workflow itself.
+
+### Guided
+
+Explain the length once: "We'll cover you, your first task, and your preferences,
+then review a short brief. You can skip any question." Use these topic labels:
+
+1. **1 of 3: About you.** "What should I call you, and what do you do? Your name is
+   optional." Accept any introduction, including a role, project, or what keeps
+   them busy. Do not look up their identity or ask again for skipped details.
+2. **2 of 3: Your first task.** "What would you most like help with first?" Relate
+   the question to the introduction when useful. Offer a few concrete tasks based
+   on their answers, plus room to describe something else. Apply the same rules
+   for capturing purpose and asking only needed follow-ups as Quick.
+3. **3 of 3: Preferences.** Ask only about limits or preferences not already given.
+
+These are topic counts, not a promise of exactly two or three messages or a timed
+estimate. If an answer covers later topics, skip those questions and advance to
+the next missing topic or preview. Do not display stages the user already finished.
+
+### Preferences and uncertain answers
+
+On either route, ask: "Any limits or preferences I should work around, such as
+time, tools, things to avoid, or how you like answers? You can skip this."
+Where choices help, offer a few relevant examples and a skip option, while keeping
+free text available. Selecting a response style does not imply anything about
+budget, deadlines, tools, or other limits.
+
+If the task is unclear, offer small choices such as organizing a note, planning
+a task, or reviewing a draft. If asked to choose or if the user skips choosing a
+task, preview a small fictional note-organizing example under "Explore how this
+workspace works". Keep its sample facts out of the profile. Do not loop through
+the route picker or keep asking for an identity or task they declined to provide.
+After that sample, cover preferences only if still unanswered, then preview the
+setup. A skipped preference counts as answered.
+Skipped preferences default to concise, friendly responses with no additional
+boundaries specified by the user. Label those as defaults in the preview.
+
+Capture context accurately: a request for marketing help is not a claim that the
+user is a marketer. Keep supplied names, roles, projects, offers, audiences, and
+constraints distinct; leave unknown details unknown. Do not infer website content
+from a URL or treat one as a request to research the user. Preserve multiple goals
+or tasks when supplied. Propose a sensible first task in the editable brief unless
+the order needs a user decision. Do not demand metrics, dates, budgets, a location,
+or personal history just to complete fields. Current corrections replace earlier
+answers in the draft, including related workflow details.
 
 ## 3. Preview one small setup
 
@@ -58,10 +122,18 @@ Read `templates/profile.md` and `templates/workflow.md`. Draft:
 - `local/workflows/first-task.md`: one workflow tailored to that task, with inputs,
   a few steps, an output, a quality check, and an explicit local save policy.
 
-Show a concise summary of the exact facts and workflow being saved, including
-assumptions and both paths. State that running this workflow will save output
-under `local/work/` if that is the proposed policy. Offer session-only use too.
-Ask “Save this setup?” unless the user has already explicitly authorized saving it.
+Both routes end with the same short, editable brief: confirmed context, the first
+task and intended result, preferences and limits, and the proposed workflow. Keep
+unknowns and suggested defaults distinct from confirmed facts. Show both intended
+paths without dumping blank template headings. State that running this workflow
+will save output under `local/work/` if that is the proposed policy. Offer
+session-only use too. Omit personal details the user asks to leave out.
+Ask "Save this setup?" only if the user has not already chosen saving or
+session-only use. "No saving" selects session-only use with output in chat;
+honor it without asking again or proposing automatic output saving.
+If saving is requested before a usable draft exists, collect only what is needed
+to form it and show the preview first. Do not create a partial setup just because
+the user requested a save early. In demo, the same rule applies to simulated files.
 Corrections are instructions to revise the draft, not approval of unrelated facts.
 
 Do not require a project name, architecture, persona, mandatory context files,

@@ -20,7 +20,8 @@ and reach a useful first result without choosing an architecture.
 
 Success means:
 
-- The agent asks about the user's purpose before introducing a domain.
+- The agent uses the user's task and optional introduction to understand their
+  purpose, without assuming a domain.
 - One short profile and one useful workflow are enough to start.
 - A saved result can be found, reviewed, corrected, and continued.
 - Missing setup never blocks a greeting, explanation, clear task, or repo repair.
@@ -142,34 +143,62 @@ is unclear, ask whether to resume or change. Never silently reset or create a
 second setup. Preserve partial files and offer to repair only the missing component;
 if repair is already requested, proceed without another approval question.
 
-### Ask three topics, not a worksheet
+### Offer a quick or guided start
 
-Use answers already supplied in the conversation. Normally ask one topic at a time:
+For fresh setup with no task or route already supplied, offer "Quick: give me a
+task", "Guided: get to know me", and
+"See an example". Both routes end with a short editable brief before the save
+decision. If a setup request already supplies a task, use Quick without a route
+question unless the user explicitly asks for Guided. Resume existing drafts
+without the menu. Switching routes preserves completed answers.
+If the user skips the route or is unsure, use Quick and ask for the task.
+Skipping the route does not skip the task.
 
-1. “What would you like your AI assistant to help you with?”
-2. “What's one useful thing you'd like it to do first?”
-3. “Any constraints or preferences I should respect? You can skip this.”
+Quick covers two topics, the first task and preferences. Guided covers three:
+an optional introduction, the first task, and preferences. Its introduction asks
+"What should I call you, and what do you do? Your name is optional." Explain the
+topics once, label the current topic with its position, and ask one topic at a
+time. Skip anything already answered, even if that advances straight to the brief.
+Topic counts are not fixed question counts or time estimates.
 
-Capture what a useful result looks like and relevant background from the user's
-answers. Constraints may include time, resources, tools, or things to avoid;
-preferences may include tone, format, and depth. Ask follow-ups only when they
-change the task, not to fill every possible field.
+Use native clickable choices when the host supports them in the current mode
+and they help. Always allow free text. Otherwise show a short numbered list and
+accept numbers, labels, or typed answers. Present a question once, without
+duplicating a question widget's prompt in another reply. No widget is required.
 
-Accept “skip”, “not sure”, and free text. A question widget is optional. Do not
-infer a location, currency, occupation, domain, or risk profile. Domain-specific
-questions must be justified by the user's chosen task. Do not look up their
-identity or require a name, employer, financial details, or background biography.
+"See an example" shows a short fictional input, setup brief, and result in chat,
+then invites the user's own task or Guided. It does not create a profile or change
+the demo variant. If requested midway through setup, preserve the draft and resume
+its next missing topic afterward. Keep example facts out of personal context.
 
-If they are unsure, offer small task types such as organizing a note, planning a
-task, or reviewing a draft. If asked to choose or if both goal and task are skipped,
-propose exploring the workspace with a labeled fictional note-organizing demo.
-Save no demo facts as user facts. Optional style defaults to concise and friendly.
+Extract purpose, desired result, and relevant context from the user's task and
+introduction. Do not require a separate goal question when the task explains it.
+Ask only a missing detail needed for a useful preview; defer execution inputs
+until the task runs unless they change the workflow. Preserve multiple requested
+tasks and propose one to begin with if the order does not need a user decision.
+Apply corrections to the draft and its related workflow details.
+
+Ask about any remaining limits or preferences, with examples such as time, tools,
+things to avoid, or answer style. Accept "skip" and "not sure". Do not infer a
+role from a task domain, website contents from a URL, or an unstated location,
+budget, or deadline. Do not look up the user's identity or require personal details.
+
+If the task is unclear, offer organizing a note, planning a task, or reviewing a
+draft. If asked to choose or the user skips choosing a task, preview a short,
+labeled fictional note-organizing example under "Explore how this workspace works".
+Do not keep asking for skipped answers or restart the route menu. Optional style
+defaults to concise and friendly; identify defaults as suggestions in the brief.
+After a sample chosen for an unsure user, cover preferences if still unanswered,
+then preview setup. A skipped preference counts as answered.
 
 ### Preview, then save within authorization
 
 Draft one profile and one workflow. Show a compact summary of their content, any
 assumptions, their paths, and whether running the workflow will save output. Ask
-“Save this setup?” unless the user has already explicitly authorized saving it.
+"Save this setup?" only if the user has not already chosen saving or session-only
+use. Honor "no saving" as session-only with output in chat, without another save
+question or automatic output saving. An early save request still needs a usable
+draft and preview first; it does not justify creating partial setup files.
 Accept corrections or session-only use. One setup decision is enough; don't ask
 for each file separately.
 

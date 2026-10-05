@@ -2,7 +2,7 @@
 
 tiny brain gives your AI assistant a set of Markdown files for your goals, preferences, repeatable tasks, and saved work.
 
-The assistant asks about your goals and constraints, then drafts a profile and a workflow for you to review. You use these files through Codex, Claude Code, or Cursor.
+Choose a quick start with a task, or a guided introduction so the assistant can get to know you first. Both lead to a short profile and workflow you can review before saving. You use these files through Codex, Claude Code, or Cursor.
 
 ## Try it before setup
 
@@ -20,7 +20,7 @@ Both follow the repository's current instructions. The assistant labels replies 
 Send each command or answer as a separate message in the **same chat**:
 
 1. Send `/demo test`. This starts onboarding immediately; you do not need to send `/demo` or `/start` first.
-2. Answer the assistant's questions in ordinary messages. Try a goal, skip an optional detail, or correct the proposed setup as a new user would.
+2. Choose Quick, Guided, or See an example, unless you already supplied a task. Use clickable choices when your tool offers them, or answer in ordinary messages. Skip an optional detail or correct the proposed setup as a new user would.
 3. When a setup is proposed, you can say "Save this setup" and then "Run my first workflow" to try the rest of the experience. Both remain simulated. You can also choose session-only use.
 4. Send `/demo review` whenever you want feedback, even halfway through onboarding. It reviews what happened so far and suggests improvements in chat.
 5. After the review, reply normally to continue the same attempt, use `/demo reset` to try again from scratch, or use `/demo exit` to finish.
@@ -51,12 +51,20 @@ Demo is a conversational instruction, not a permission sandbox. The tool's contr
 Set up tiny brain in this project using this repository:
 https://github.com/williswee/tiny-brain
 
-Read its README and copy the starter files, including .gitignore, into this folder. Preserve any existing work. Follow AGENTS.md and commands/start.md to help me define my goals, first task, constraints, and preferences. Ask about one topic at a time and use answers I've already given. Show me the proposed personal setup before saving it.
+Read its README and copy the starter files, including .gitignore, into this folder. Preserve any existing work. Follow AGENTS.md and commands/start.md to help me set up tiny brain. Offer Quick or Guided unless I've already given you a task or chosen a route. Ask about one topic at a time and use answers I've already given. Show me the proposed personal setup before saving it.
 ```
 
 You can use the same prompt in Claude Code or Cursor with an empty folder open and file access enabled.
 
-The assistant drafts your profile and first workflow from your answers. Review them before saving. You can say "not sure", skip optional details, or keep the setup only in this chat.
+Choose how to begin:
+
+| Choice | What happens |
+| --- | --- |
+| Quick: give me a task | Describe what you want done, add any preferences, then review the brief. If your setup request already includes a task, the assistant starts here automatically. |
+| Guided: get to know me | Share an optional introduction, choose a first task, and add preferences. Progress labels show the three topics before the brief. |
+| See an example | See a short fictional example before choosing your own task or guided setup. |
+
+The assistant asks about one topic at a time and reuses answers you already gave. Choose an option when clickable choices are available, or type your own answer. You can say "not sure", skip questions, correct the brief, or keep the setup only in this chat. No name or job is required.
 
 If you already have the files, open their folder in your AI tool. If you downloaded a ZIP, extract it first. Then paste:
 
@@ -270,12 +278,12 @@ Replace "weekly sales pipeline review" with the use case you choose. Start with 
 
 ## What the assistant asks you
 
-Setup covers these topics, usually one at a time. The assistant reuses answers you have already given and asks follow-up questions only when they help with your task.
+Quick starts with your task. Guided adds an optional introduction first. The assistant asks one topic at a time, reuses answers you have already given, and asks follow-up questions only when needed for a useful setup.
 
 | Topic | Example question | What the assistant needs to know |
 | --- | --- | --- |
-| Your goals | "What would you like help with?" | What you want to achieve and how you will judge the result. |
-| Your first task | "What's one useful thing to do first?" | What you are working on, the input you have, and the result you need. |
+| About you, in Guided | "What should I call you, and what do you do? Your name is optional." | Relevant background you choose to share. You can skip the introduction. |
+| Your first task | "What's one useful thing you'd like help with first?" | What you want done and what a useful result looks like. This can also supply your goal without another question. |
 | Your constraints and preferences | "What limits or preferences should I respect?" | Relevant deadlines, available time and resources, things to avoid, and how you want answers presented. Skip details that do not matter. |
 
 You can start without all the answers and add details as you work. The assistant should never assume your industry, country, job, or personal circumstances.
