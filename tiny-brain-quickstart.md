@@ -31,7 +31,7 @@ Do not replace an existing `AGENTS.md` or `CLAUDE.md` blindly.
 Only received these two guides? Put them in a new folder, open it in your AI tool,
 and say:
 
-> Read tiny-brain-blueprint.md and create its minimal starter in this folder. Then help me set it up.
+> Read tiny-brain-blueprint.md and create its minimal starter in this folder, preserving existing work. After verifying the files, start onboarding in the same reply: ask how I'd like to start, explain Quick, Guided, and See an example, and tell me how to reply. If I've already supplied a task or route or have a setup to resume, ask only the next unanswered question. Ask one topic at a time and show the proposed personal setup before saving it.
 
 The full starter is the easier route; the two-guide route asks the assistant to
 build the small set of files first.
@@ -77,13 +77,14 @@ and external actions. After leaving demo, continue below when you want real setu
 
 > Start tiny brain
 
-Choose a way to begin:
+For a fresh setup with no task or route supplied, the assistant's first reply asks
+how you'd like to start and shows these choices:
 
-- **Quick: give me a task.** Describe one useful thing you want done, then add any
-  preferences. The assistant moves straight to this route if you already gave a task.
-- **Guided: get to know me.** Start with "What should I call you, and what do you
-  do?" Your name is optional. Then choose a first task and add any preferences.
-- **See an example.** See a short fictional setup and result before trying your own.
+1. **Quick: give me a task.** Describe one useful thing you want done, then add any
+   preferences. The assistant moves straight to this route if you already gave a task.
+2. **Guided: get to know me.** Start with "What should I call you, and what do you
+   do?" Your name is optional. Then choose a first task and add any preferences.
+3. **See an example.** See a short fictional setup and result before trying your own.
 
 Quick covers two topics; Guided covers three. The assistant shows your progress,
 asks one topic at a time, and skips what you already answered. Both end with a

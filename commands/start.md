@@ -29,18 +29,31 @@ repeating the whole brief after every answer. Accept free text, "skip", and
 
 ### Choose how to begin
 
-For fresh setup with no task or route already supplied, offer:
+For fresh setup with no task or route already supplied, ask the route question
+in the first reply after checking the starter files. If copying or creating files
+was requested, complete and verify that first, then ask in the same reply that
+reports completion. Do not stop at a file inventory or "the route selector is
+ready", or wait for another start message.
 
-> Choose a quick start or a guided setup. Both end with a short brief you can edit
-> before deciding whether to save it.
+Use this opening, or equivalent wording with all three choices, a short explanation
+of each, and an explicit reply instruction:
 
-- **Quick: give me a task** starts with what the user wants done.
-- **Guided: get to know me** starts with an optional introduction.
-- **See an example** shows a short fictional input, setup brief, and sample result
-  in chat. Ask for the user's own task or offer guided setup afterward. Do not
-  adopt the example as their profile, save it, or change the active demo mode.
-  If requested midway through setup, keep the draft and resume its next missing
-  topic afterward.
+> How would you like to start?
+>
+> 1. **Quick: give me a task.** Tell me what you'd like help with, then add any preferences.
+> 2. **Guided: get to know me.** Start with an optional introduction, then choose a task and preferences.
+> 3. **See an example.** See a fictional setup and sample result before choosing.
+>
+> Reply with 1, 2, or 3, a label, or your own words.
+>
+> I'll ask one topic at a time and show you a short setup brief to review before saving. You can also keep it in this chat.
+
+Wait for the route answer before asking about the task, introduction, or preferences.
+For **See an example**, show a short fictional input, setup brief, and sample result
+in chat. Ask for the user's own task or offer guided setup afterward. Do not
+adopt the example as their profile, save it, or change the active demo mode.
+If requested midway through setup, keep the draft and resume its next missing
+topic afterward.
 
 Use a native clickable question control when the host supports it in the current
 mode and choices would help. Always allow a typed answer. Otherwise show a short

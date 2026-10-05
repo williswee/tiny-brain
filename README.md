@@ -51,12 +51,12 @@ Demo is a conversational instruction, not a permission sandbox. The tool's contr
 Set up tiny brain in this project using this repository:
 https://github.com/williswee/tiny-brain
 
-Read its README and copy the starter files, including .gitignore, into this folder. Preserve any existing work. Follow AGENTS.md and commands/start.md to help me set up tiny brain. Offer Quick or Guided unless I've already given you a task or chosen a route. Ask about one topic at a time and use answers I've already given. Show me the proposed personal setup before saving it.
+Read its README and copy the starter files, including .gitignore, into this folder. Preserve any existing work. Follow AGENTS.md and commands/start.md to help me set up tiny brain. In your first reply after verifying the copy, ask how I'd like to start: Quick: give me a task, Guided: get to know me, or See an example. Briefly explain each choice and tell me to reply with its number, label, or my own words. Don't stop at a file-copy report or a "ready" message. If I've already given you a task, chosen a route, or started a setup draft, continue with the next unanswered topic instead. Ask about one topic at a time and use answers I've already given. Show me the proposed personal setup before saving it.
 ```
 
 You can use the same prompt in Claude Code or Cursor with an empty folder open and file access enabled.
 
-Choose how to begin:
+For a fresh setup with no task or route supplied, the assistant's first reply after copying the files should ask how you'd like to start and show these choices:
 
 | Choice | What happens |
 | --- | --- |
@@ -69,7 +69,7 @@ The assistant asks about one topic at a time and reuses answers you already gave
 If you already have the files, open their folder in your AI tool. If you downloaded a ZIP, extract it first. Then paste:
 
 ```text
-Read AGENTS.md and follow commands/start.md to help me set up tiny brain.
+Read AGENTS.md and follow commands/start.md to help me set up tiny brain. Ask the first unanswered question now, including the route choices if I haven't supplied a task or route and have no setup to resume.
 ```
 
 Once the files are in place, you can also say "Start tiny brain". These are ordinary chat messages, so you do not need a slash command. If the assistant cannot retrieve the repository, download it from GitHub with **Code > Download ZIP** and follow the steps above.

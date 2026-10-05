@@ -5,7 +5,10 @@ scenario. These are behavioral checks; matching phrases in files cannot prove th
 
 | Scenario | Try | Expected behavior |
 | --- | --- | --- |
-| Fresh setup | "Start tiny brain" | Offers Quick, Guided, and See an example; explains that both routes lead to an editable brief; assumes no personal facts |
+| Fresh setup | "Start tiny brain" | The first reply asks how to start, describes Quick, Guided, and See an example, and tells the user how to reply; mentions one topic at a time and preview before saving; assumes no personal facts |
+| Pasted repository prompt | Paste the README's setup prompt into an empty disposable folder | After verifying the copy, the same reply includes the route question, all three explained choices, and a reply instruction; a file-copy report or "ready" alone fails; no second start message is needed |
+| Generated starter | Use the quickstart's two-guide prompt in a disposable folder containing only the guides | After verifying the generated files, the same reply asks the route question with all three explained choices and a reply instruction |
+| Route reply | Reply with "1", "Quick", "2", "Guided", "3", or "See an example" in separate fresh runs | Each number or label selects its displayed route; the opening does not also ask for a task, introduction, or preferences before the route answer |
 | Quick route | Choose "Quick: give me a task" | Covers task and preferences with topic progress labels, then previews the brief; no required introduction or separate goal question |
 | Guided route | Choose "Guided: get to know me" | Shows the three topics; begins with an optional name/role introduction, then asks only for the remaining task and preferences |
 | Answers already supplied | "Start tiny brain. I want help studying, first turn my notes into a revision plan, keep it short." | Uses Quick without a route question, reuses all answers, and previews setup without repeating completed topics |
@@ -91,6 +94,30 @@ observations from suggestions. Do not infer satisfaction or success from an
 assistant-generated walkthrough. `/demo review` keeps this feedback in chat;
 saving a report or changing the starter is separate work outside demo.
 
+## Startup regression checks
+
+Run `python3 -B -m unittest discover -s tests -v` from the repository root. These
+source checks cover the opening question, all three explained choices, the reply
+instruction, prompt entry points, and matching blueprint wording. They also keep
+the supplied-task and resume exceptions, one-topic rule, and preview-before-save
+rule in view. They need no dependencies beyond Python's standard library and are
+not needed to use the starter.
+
+For a conversational check, run the first four scenarios above with fictional
+inputs in fresh disposable sessions. Inspect the first reply after file preparation,
+not a later response after prompting again. With native choices, inspect the
+question control as part of that reply and check that it accepts typed answers.
+Without controls, require a numbered list and a clear instruction to reply.
+
+Reject this reported response on its own: "Copied and verified all 18 starter
+files, including .gitignore. The folder was empty; nothing was overwritten. The
+route selector is ready. I'll ask one topic at a time and show your proposed
+personal setup before saving it." It has no route question, choices, or reply
+instruction. An inventory count is not required in the corrected response.
+
+Static checks and source-level rehearsals do not establish client behavior.
+Record actual client runs separately below.
+
 ## Static checks
 
 - All local Markdown links and runtime file references resolve, except clearly
@@ -119,6 +146,13 @@ skips, supplied answers, corrections, examples, session-only use, and demo contr
 The review found ambiguous route skips and early save choices; the instructions
 were corrected and those cases rechecked. These are source-level checks, not
 client verification or a completed beginner usability study.
+
+Startup review on 2026-10-05: four automated source checks passed and rejected
+the pre-change instructions. An independent source-level rehearsal covered five
+first-reply cases and the 1/2/3 route mapping. Fresh replies included the route
+question, all three descriptions, and a reply instruction. Supplied tasks and
+existing drafts skipped the menu. These were source checks and conversational
+rehearsals, not live client runs.
 
 | Date | Tool / version | OS | Model | Scenario | Result / evidence |
 | --- | --- | --- | --- | --- | --- |

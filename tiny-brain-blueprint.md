@@ -145,12 +145,27 @@ if repair is already requested, proceed without another approval question.
 
 ### Offer a quick or guided start
 
-For fresh setup with no task or route already supplied, offer "Quick: give me a
-task", "Guided: get to know me", and
-"See an example". Both routes end with a short editable brief before the save
-decision. If a setup request already supplies a task, use Quick without a route
-question unless the user explicitly asks for Guided. Resume existing drafts
-without the menu. Switching routes preserves completed answers.
+For fresh setup with no task or route already supplied, ask the route question
+in the first reply after checking the starter files. After copying or generating
+the starter, include it in the same reply that reports completion. Do not stop
+at a file inventory or "the route selector is ready", or wait for another start
+message. Include all three choices, a short explanation of each, and an explicit
+reply instruction. Use this opening or equivalent wording:
+
+> How would you like to start?
+>
+> 1. **Quick: give me a task.** Tell me what you'd like help with, then add any preferences.
+> 2. **Guided: get to know me.** Start with an optional introduction, then choose a task and preferences.
+> 3. **See an example.** See a fictional setup and sample result before choosing.
+>
+> Reply with 1, 2, or 3, a label, or your own words.
+>
+> I'll ask one topic at a time and show you a short setup brief to review before saving. You can also keep it in this chat.
+
+Wait for the route answer before asking about the task, introduction, or preferences.
+If a setup request already supplies a task, use Quick without a route question
+unless the user explicitly asks for Guided. Resume existing drafts without the
+menu. Switching routes preserves completed answers.
 If the user skips the route or is unsure, use Quick and ask for the task.
 Skipping the route does not skip the task.
 
